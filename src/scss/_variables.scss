@@ -1,0 +1,75 @@
+/*
+ * カラー設定
+ */
+
+// Monotone
+$color-white: #fff;
+$color-white-gray: #f8f8f8;
+$color-gray: #ccc;
+$color-black-gray: #858585;
+$color-black: #000;
+
+$color-black-alpha0: rgba(0, 0, 0, 0.6);
+
+// Primary
+$color-blue700: #00467B;
+$color-blue600: #005EA4;
+$color-blue500: #0075cd;
+$color-blue400: #3190D7;
+$color-blue300: #62ABE1;
+$color-blue200: #EBF7FF;
+
+$color-blue1: #005799;
+
+// Error
+$color-red700: #800000;
+$color-red600: #AB0000;
+$color-red500: #D60000;
+$color-red400: #DE3333;
+$color-red300: #E66666;
+
+//Secondary
+$color-green700: #1D5C05;
+$color-green600: #277A06;
+$color-green500: #319908;
+$color-green400: #53AD2F;
+$color-green300: #75C156;
+
+$color-green1: #226604;
+
+// Accent
+$color-orange700: #853828;
+$color-orange600: #B24A35;
+$color-orange500: #DE5D42;
+$color-orange400: #E57D68;
+$color-orange300: #EB9E8E;
+
+// Gold (XDにないカラーパレット)
+$color-gold: #B1941E;
+$color-gold-thin: #FDF5D8;
+
+// ヘッダ背景色
+$color-header-bg: rgba(255, 255, 255, 0.9);
+
+/*
+ * Custom Alpha
+ */
+
+// $color-blue500: #0075cd (alpha 50%)
+$color-blue500-15: rgba(0, 116, 204, 0.15);
+
+// $color-green500: #319908 (alpha 15%)
+$color-green500-15: rgba(50, 156, 8, 0.15);
+
+// $color-orange500: #DE5D42 (alpha 15%)
+$color-orange500-15: rgba(221, 90, 64, 0.15);
+
+
+// ヘッダ用SP切り替え幅
+$header-sp-max: 1039px;
+
+// ホバーアニメの基本秒数
+$hover-time: 0.2s;
+
+// Primary Buttonの基本幅
+$primary-button-width: 550px;

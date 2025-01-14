@@ -1,0 +1,325 @@
+---
+/* author kubonaka */
+
+import { CURRENT_RELEASE, RELEASE_0425, getTextCurrentVersion } from "./Branch.astro";
+import { Pages } from "./Page.astro";
+
+
+export interface Option {
+  value: string;
+  label: string;
+}
+
+export interface DirectoryItem {
+  title: string;
+  url: string;
+}
+
+/*
+ * ページ情報フォーマット
+ */
+export interface PageInfo {
+
+  // インデックス
+  index?: number;
+
+  // 固有ID
+  id: string;
+
+  // ページ担当者
+  author?: string;
+
+  // ページタイトル（index表示用）
+  title: string;
+
+  // カテゴリ（ページ一覧表示用）
+  category?: string;
+
+  // ページタイトル（画面で使用）
+  pageTitle?: string;
+
+  // ナビ用タイトル
+  menuTitle?: string;
+
+  // タイトル表示時の階層構造
+  parent?: string;
+
+  // パンくずで上階層にあたるページID
+  breadParents?: string[];
+
+  // ステータス（ページ一覧用）
+  status?: string;
+
+  // URL
+  href: string;
+
+  // アンカー
+  anchor?: string;
+
+  // _target
+  target?: string;
+
+  // サイト上には存在しない少しレイアウトが異なるパターンを開発用で別途作ってる場合
+  ignoreGetPage?: boolean; /* 派生ページ（ページ一覧でのみ使用） */
+
+  // 子要素（階層メニュー情報取得用）
+  children?: PageInfo[];
+
+  // ページ一覧にクリッカブルで表示するかどうか
+  // 実際にページが出来てからtrueにしていく
+  clicablePageList?: boolean;
+
+  // 現行URL(存在していれば）開発用
+  currentURL?: string;
+
+  // ディスクリプション
+  description: string;
+}
+
+/*
+ * パンくずアイテム
+ */
+export interface BreadListInfo {
+  id: string;
+  directories: DirectoryItem[];
+}
+
+/*
+ * インプットタイプ
+ * <input>だけじゃなく<select>も含む
+ */
+export enum InputType {
+  Text = 'text',
+  Email = 'email',
+  Password = 'password',
+  Tel = 'tel',
+  Button = 'button',
+  Select = 'select',
+  CheckBox = 'checkbox',
+  Radio = 'radio',
+  Hidden = 'hidden'
+}
+
+/*
+ * Input要素定義
+ */
+export interface InputProps {
+  index?: number,
+  title?: string;
+  element?: 'input' | 'select';
+  type?: 'text' | 'email' | 'password' | 'tel' | 'radio' | 'checkbox' | 'hidden' | 'button';
+  name?: string;
+  id?: string;
+  value?: string;
+  maxLength?: number;
+  onClick?: string;
+  style?: string;
+}
+
+/* 
+ * idよりページ情報取得
+ * anchor指定を追加
+ * [MEMO] 外部で使ってないのにexportをつけないとエラーになる
+ */
+export const getPageById = (id: string, childrenIds: string[] = [], anchor?: string):PageInfo => {
+
+  let result: PageInfo = {
+    index: 0,
+    id: id,
+    title: '〇〇〇〇',
+    href: 'javascript:void(0)',
+    anchor: anchor,
+    target: '_self',
+    description: ''
+  };
+
+  const children: PageInfo[] = [];
+
+  for (var i = 0; i < childrenIds.length; i++) {
+    children[i] = getPageById(childrenIds[i], [], anchor);
+  }
+
+  const targetPages: PageInfo[] = Pages;//(id.indexOf('Out') >= 0) ? OutPages : Pages;
+
+  for (var i = 0; i < targetPages.length; i++) {
+    const page = targetPages[i];
+    if (id === page.id && anchor === page.anchor && !page.ignoreGetPage) {
+      result = {
+        index: 0,
+        id: id,
+        title: page.title,
+        pageTitle: page.pageTitle,
+        menuTitle: page.menuTitle,
+        parent: page.parent,
+        breadParents: page.breadParents,
+        href: `${page.href || ''}${(anchor ? ('#' + anchor) : '')}`,
+        target: page.target || '_self',
+        children: children,
+        description: page.description
+      };
+    }
+  }
+
+  return result;
+}
+
+
+/*
+ * Descriptionを取得
+ */
+export const getDescription = (breadList?: string[]): string => {
+  if (breadList) {
+    if (breadList.length > 0) {
+      return getPageById(breadList[0]).description;
+    } else {
+      return '-';
+    }
+  } else {
+    return '-';
+  }
+};
+
+
+export const createTitle = (breadList: string[]): string => {
+
+  let title = '';
+
+  if (breadList && breadList.length > 0) {
+    const info: PageInfo = getPageById(breadList[0]);
+
+    if (info.id === 'H-01' || info.id === 'M-01') {
+      // トップページ
+      title += info.pageTitle;
+    } else {
+      // 下層ページ
+
+      if (info.parent) {
+        title += info.pageTitle;
+
+        const parentInfo: PageInfo = getPageById(info.parent);
+        if (parentInfo.pageTitle) {
+          title += '｜' + parentInfo.pageTitle;
+        }
+      } else {
+        title += info.pageTitle;
+      }
+      title += '｜' + getPageById('H-01').pageTitle;
+    }
+  //   title = getPageById(breadList[0]).pageTitle || '';
+    
+  }
+
+  return title;
+};
+
+/*
+ * ヘッダナビゲーション
+ */
+export const HeaderNavigation = [
+  getPageById('B-01'),
+  getPageById('P-01'),
+  getPageById('S-01'),
+  getPageById('T-01'),
+  getPageById('D-01'),
+  getPageById('G-0')
+];
+
+/*
+ * メニューボタン展開時のナビゲーション
+ */
+export const HeaderFloatNavigation = [
+  getPageById('B-01', ['B-02', 'C-01', 'C-03']),
+  getPageById('P-01', (CURRENT_RELEASE == RELEASE_0425) ? ['P-02', 'P-04', 'P-02-05', 'P-03'] : ['P-02', 'P-02-05', 'P-03']),
+  getPageById('S-01', ['S-02', 'S-08', 'S-03', 'S-04', 'S-07']),
+  getPageById('T-01'),
+  getPageById('D-01', ['D-02']),
+  getPageById('G-0', ['G-01', 'G-02']),
+  getPageById('F-01'),
+  getPageById('N-02')
+];
+
+/*
+ * フッタのSNSボタンリンク
+ */
+export const FooterSnsLinks = {
+  twitter: 'https://twitter.com/seibuprinceclub/',
+  instagram: 'https://www.instagram.com/seibuprinceclub/',
+  facebook: 'https://www.facebook.com/seibuprinceclub/'//,
+  //mailmagazine: '#'
+};
+
+/*
+ * フッタナビゲーション
+ */
+export const FooterNavigation: PageInfo[] = [
+  getPageById('O-01'),
+  getPageById('C-03', [], 'anchor1'),
+  getPageById('C-03'),
+  getPageById('F-02-11-Footer'),
+  getPageById('O-04'),
+  getPageById('Out-06'),
+  getPageById('O-03'),
+  getPageById('O-02')
+];
+
+/*
+ * フッタ外部リンク
+ */
+export const FooterOutLinks: PageInfo[] = [
+  getPageById('Out-01'),
+  getPageById('Out-02'),
+  getPageById('Out-03'),
+  getPageById('Out-04'),
+  getPageById('Out-05')
+];
+
+
+/* 
+ * 加盟店リンク
+ */
+export const shopListLinks = [
+  "https://www.seiburailway.jp/",
+  getTextCurrentVersion(['http://www.princehotels.co.jp/', 'https://www.seibuprince.com/ja/', 'https://www.seibuprince.com/ja/']),
+  "https://www.seiburealsol.jp/",
+  "https://www.seibubus.co.jp/",
+  "https://www.seibulions.jp/",
+  "https://www.izuhakone.co.jp/",
+  "https://www.ohmitetudo.co.jp/",
+  "https://www.seibu-leisure.co.jp/amusementpark/index.html",
+
+  "https://www.seaparadise.co.jp/",
+  "https://www.seiburealsol.jp/shopping/pepe/",
+  "https://www.seibu-shop.jp/baba/",
+  "https://www.karuizawa-psp.jp/",
+  "https://www.seibu-shop.jp/emio/",
+  "https://www.seiburailway.jp/life/tomony/",
+  "https://www.pet-spa.co.jp/",
+  "https://www.seibutravel.co.jp/"
+];
+
+// 4/25 URL変更箇所
+
+export const URL_PRINCE_PSS = getTextCurrentVersion([
+  'https://www.princehotels.co.jp/pss/',
+  'https://www.princehotels.co.jp/pss/',
+  'https://www.seibuprince.com/ja/loyalty/'
+]);
+
+export const URL_PRINCE_YOYAKU = getTextCurrentVersion([
+  'https://www.princehotels.co.jp/support/yoyaku_info/',
+  'https://www.princehotels.co.jp/support/yoyaku_info/',
+  'https://www.seibuprince.com/ja/support/inquiry/'
+]);
+
+export const URL_PRINCE_INFO = getTextCurrentVersion([
+  'https://www.princehotels.co.jp/rsv_information/infotop-ja.html',
+  'https://www.princehotels.co.jp/rsv_information/infotop-ja.html',
+  'https://www.seibuprince.com/ja/support/reservation-cancel/'
+]);
+
+export const URL_PRINCE_SERVICE = getTextCurrentVersion([
+  'https://www.princehotels.co.jp/pss/servicelist/service02.html',
+  'https://www.princehotels.co.jp/pss/servicelist/service02.html',
+  'https://www.seibuprince.com/ja/loyalty./benefits/golf-best-rate-guarantee/'
+]);
+---

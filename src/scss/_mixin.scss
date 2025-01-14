@@ -1,0 +1,325 @@
+/*
+ * SPレイアウトのみ適用(デフォルト幅設定）
+ */
+@mixin sp {
+  @media only screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+/*
+ * PCレイアウトのみ適用(デフォルト幅設定）
+ */
+@mixin pc {
+  @media only screen and (min-width: 769px) {
+    @content;
+  }
+}
+
+/*
+ * SPレイアウトのみ適用(ヘッダ用）
+ */
+@mixin sp-header {
+  @media only screen and (max-width: $header-sp-max) {
+    @content;
+  }
+}
+/*
+ * PCレイアウトのみ適用(ヘッダ用）
+ */
+@mixin pc-header {
+  @media only screen and (min-width: #{$header-sp-max + 1}) {
+    @content;
+  }
+}
+
+/*
+ * サイズ指定ありメディアクエリ（$size以内レイアウト）
+ */
+@mixin mquery-max($size) {
+  @media only screen and (max-width: $size) {
+    @content;
+  }
+}
+/*
+ * サイズ指定ありメディアクエリ（$size以上レイアウト）
+ */
+@mixin mquery-min($size) {
+  @media only screen and (min-width: $size) {
+    @content;
+  }
+}
+
+/* 
+ * 基本ページ幅
+ */
+@mixin base-width($width : 1120px) {
+  max-width: $width;
+  margin-left: auto;
+  margin-right: auto;
+  // box-sizing: border-box;
+  padding-left: 80px;
+  padding-right: 80px;
+
+  @include sp {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+/* 
+ * 基本ページ幅（ヘッダ用）
+ */
+@mixin base-width-header() {
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+  // box-sizing: border-box;
+  padding-left: 80px;
+  padding-right: 80px;
+
+  @include sp-header {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+/*
+ * PCレイアウト時のみ表示
+ */
+@mixin display-pc {
+  @include sp {
+    display: none !important;
+  }
+}
+
+/*
+ * SPレイアウト時のみ表示
+ */
+@mixin display-sp {
+  @include pc {
+    display: none !important;
+  }
+}
+
+@mixin border-chip($color) {
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 8px;
+    background-color: $color;
+    top: 0;
+    left: calc(50% - 30px);
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+
+    @include sp {
+      width: 30px;
+      left: calc(50% - 15px);
+    }
+  }
+}
+ 
+/*
+ * 基本トランジション
+ * ボタンなどのホバーは出来るだけこちらを使用
+ */
+@mixin base-transition($prop : all) {
+  transition: $prop $hover-time ease-in-out;
+}
+
+/*
+ * ホバー指定共通
+ * SP時に動かないように
+ * 自分ホバー時に自分のプロパティ変更と
+ * 親の<a>, <button>がホバー時に子のプロパティ変更に対応
+ */
+@mixin hover {
+  @include pc {
+    @include base-transition;
+    &:hover,
+    a:hover &,
+    button:hover & {
+      @content;
+    }
+  }
+}
+
+/*
+ * 基本のテキストホバーアニメ
+ */
+@mixin text-hover {
+  @include hover {
+    text-decoration: none;
+    color: $color-blue500;
+  }
+}
+
+/*
+ * background-image (汎用アイコン)
+ */
+@mixin icon-blank($color) {
+  background-image: inline-svg(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="17.75" height="17.42" viewBox="0 0 17.75 17.42"><g id="グループ_8152" data-name="グループ 8152" transform="translate(-4.25 -8)"><g id="長方形_120" data-name="長方形 120" transform="translate(8 8)" fill="none" stroke="#{$color}" stroke-width="1.5"><rect width="14" height="14" rx="1" stroke="none"/><rect x="0.75" y="0.75" width="12.5" height="12.5" rx="0.25" fill="none"/></g><path id="パス_7874" data-name="パス 7874" d="M5.039,8.266V20.139H18.4" transform="translate(-0.039 4.531)" fill="none" stroke="#{$color}" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/></g></svg>'
+  );
+}
+@mixin icon-download($color) {
+  background-image: inline-svg(
+    '<svg id="download" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><rect id="長方形_116" data-name="長方形 116" width="24" height="24" fill="#fff" opacity="0"/><path id="パス_7908" data-name="パス 7908" d="M11.807.355,7.459,4.83,3.109.354M14.417,3.932V6.618a1.747,1.747,0,0,1-.511,1.264,1.65,1.65,0,0,1-1.229.526H2.239a1.65,1.65,0,0,1-1.229-.526A1.747,1.747,0,0,1,.5,6.618V3.932" transform="translate(5 10.475)" fill="none" stroke="#{$color}" stroke-linecap="round" stroke-miterlimit="10" stroke-width="1.5"/><path id="パス_7909" data-name="パス 7909" d="M0-1V9" transform="translate(12.5 5.5)" fill="none" stroke="#{$color}" stroke-linecap="round" stroke-width="1.5"/></svg>'
+  );
+}
+@mixin icon-arrow-down($color) {
+  background-image: inline-svg(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="12.728" height="7.071" viewBox="0 0 12.728 7.071"><g id="arrow-right" transform="translate(835.093 422.85) rotate(135)"><line id="線_9" data-name="線 9" y2="8" transform="translate(291.5 880.5)" fill="none" stroke="#{$color}" stroke-linecap="square" stroke-width="1"/><line id="線_10" data-name="線 10" y2="8" transform="translate(291.5 880.5) rotate(90)" fill="none" stroke="#{$color}" stroke-linecap="square" stroke-width="1"/></g></svg>'
+  );
+}
+
+/*
+ * SP時の横スクロールバーのスタイル
+ */
+@mixin horizontal-scroll {
+  &::-webkit-scrollbar {
+    height:2px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: $color-gray;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $color-blue500;
+  }
+  @include sp {
+    overflow-y: hidden;
+    overflow-x: scroll;
+  }
+}
+@mixin horizontal-scroll-transparent {
+  &::-webkit-scrollbar {
+    height:2px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0);
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0);
+  }
+  @include sp {
+    overflow-y: hidden;
+    overflow-x: scroll;
+  }
+}
+
+
+//svgを背景画像として使用する関数
+@function str-replace($string, $search, $replace: "") {
+  $index: str-index($string, $search);
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace +
+      str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+  @return $string;
+}
+@function url-encode($string) {
+  $map: (
+    "%": "%25",
+    "<": "%3C",
+    ">": "%3E",
+    " ": "%20",
+    "!": "%21",
+    "*": "%2A",
+    "'": "%27",
+    '"': "%22",
+    "(": "%28",
+    ")": "%29",
+    ";": "%3B",
+    ":": "%3A",
+    "@": "%40",
+    "&": "%26",
+    "=": "%3D",
+    "+": "%2B",
+    "$": "%24",
+    ",": "%2C",
+    "/": "%2F",
+    "?": "%3F",
+    "#": "%23",
+    "[": "%5B",
+    "]": "%5D"
+  );
+  $new: $string;
+  @each $search, $replace in $map {
+    $new: str-replace($new, $search, $replace);
+  }
+  @return $new;
+}
+
+@function inline-svg($string) {
+  @return url("data:image/svg+xml;charset=utf8,#{url-encode($string)}");
+}
+
+@mixin sup {
+  :global(sup) {
+    @include font-size(18);
+    vertical-align: top;
+    bottom:0.2em;
+    position: relative;
+  }
+}
+
+@mixin require-icon {
+  background-color: $color-red500;
+  padding: 0px 7px 2px 7px;
+  color: $color-white;
+  border-radius: 4px;
+  margin-left: 5px;
+  @include font-size(12);
+}
+
+// $labelJp:もっと見る、登録する、のいずれかパターンあるので引数で受け取る
+@mixin wovn-close-label($labelJp:"JP", $labelEn:"EN") {
+  .toggle-btn {
+    &::before {
+      content: $labelJp;
+    }
+
+    .js-Accordion.--open & {
+      &::before {
+        content: "閉じる";
+      }
+
+      &::after {
+        background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2214.121%22%20height%3D%2213.061%22%20viewBox%3D%220%200%2014.121%2013.061%22%3E%20%3Cg%20id%3D%22arrow-pagetop%22%20transform%3D%22translate(1.061%201.061)%22%3E%20%3Cg%20id%3D%22arrow-pagetop-2%22%20data-name%3D%22arrow-pagetop%22%20transform%3D%22translate(6%2012)%20rotate(-135)%22%3E%20%3Cline%20id%3D%22%E7%B7%9A_9%22%20data-name%3D%22%E7%B7%9A%209%22%20y1%3D%228.485%22%20transform%3D%22translate(8.485)%22%20fill%3D%22none%22%20stroke%3D%22%230075cd%22%20stroke-linecap%3D%22round%22%20stroke-width%3D%221.5%22%2F%3E%20%3Cline%20id%3D%22%E7%B7%9A_10%22%20data-name%3D%22%E7%B7%9A%2010%22%20y1%3D%228.485%22%20transform%3D%22translate(0%208.485)%20rotate(-90)%22%20fill%3D%22none%22%20stroke%3D%22%230075cd%22%20stroke-linecap%3D%22round%22%20stroke-width%3D%221.5%22%2F%3E%20%3C%2Fg%3E%20%3C%2Fg%3E%3C%2Fsvg%3E')!important;
+      }
+    }
+  }
+
+  html:lang(en) .toggle-btn {
+    &::before {
+      content: $labelEn;
+    }
+  }
+
+  html:lang(en) .js-Accordion.--open .toggle-btn {
+    &::before {
+      content: "Close";
+    }
+
+    &::after {
+      background-image: url('data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2214.121%22%20height%3D%2213.061%22%20viewBox%3D%220%200%2014.121%2013.061%22%3E%20%3Cg%20id%3D%22arrow-pagetop%22%20transform%3D%22translate(1.061%201.061)%22%3E%20%3Cg%20id%3D%22arrow-pagetop-2%22%20data-name%3D%22arrow-pagetop%22%20transform%3D%22translate(6%2012)%20rotate(-135)%22%3E%20%3Cline%20id%3D%22%E7%B7%9A_9%22%20data-name%3D%22%E7%B7%9A%209%22%20y1%3D%228.485%22%20transform%3D%22translate(8.485)%22%20fill%3D%22none%22%20stroke%3D%22%230075cd%22%20stroke-linecap%3D%22round%22%20stroke-width%3D%221.5%22%2F%3E%20%3Cline%20id%3D%22%E7%B7%9A_10%22%20data-name%3D%22%E7%B7%9A%2010%22%20y1%3D%228.485%22%20transform%3D%22translate(0%208.485)%20rotate(-90)%22%20fill%3D%22none%22%20stroke%3D%22%230075cd%22%20stroke-linecap%3D%22round%22%20stroke-width%3D%221.5%22%2F%3E%20%3C%2Fg%3E%20%3C%2Fg%3E%3C%2Fsvg%3E')!important;
+    }
+  }
+}
+
+@mixin wovn-required {  
+  .--required-0425 {
+    .title:after {
+      content: '必須';
+    }
+  }
+  html:lang(en) .--required-0425 {
+    .title:after {
+      content: 'Must';
+    }
+  }
+}

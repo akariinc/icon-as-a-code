@@ -1,0 +1,22 @@
+{
+  "name": "template-git",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev --host",
+    "start": "astro dev",
+    "build": "astro build && html-beautify dist/**/*.html",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^3.1.0",
+    "astro-relative-links": "^0.3.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.8",
+    "@vitejs/plugin-basic-ssl": "^1.0.1",
+    "js-beautify": "^1.14.9",
+    "sass": "^1.67.0"
+  }
+}
