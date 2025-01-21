@@ -1,0 +1,66 @@
+.l-main {
+  padding: 30px;
+  position: relative;
+  box-sizing: border-box;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__header {
+    position: absolute;
+    top: 30px;
+  }
+
+  &__select {
+    border: 1px solid #ccc;
+    margin: auto;
+    max-width: 350px;
+    margin-bottom: 50px;
+  }
+
+  &__paging {
+    position: absolute;
+    font-size: 64px;
+    color: #e2e2e2;
+    font-family: arial, sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    top: 50%;
+
+    &.next {
+      left: 20px;
+    }
+
+    &.prev {
+      right: 20px;
+    }
+  }
+
+  &__pages {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__page {
+    width: 45%;
+
+    &-aspect {
+      width: 100%;
+      padding-top: 127.8295605858855%;
+      position: relative;
+    }
+
+    &.hide {
+      display: none;
+    }
+  }
+
+  &__iframe {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+}

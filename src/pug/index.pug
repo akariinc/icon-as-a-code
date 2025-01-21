@@ -1,0 +1,27 @@
+include ./_include/component/slider
+include ./_include/component/checkbox
+include ./_include/component/radiobutton
+
+block params
+  - var path = "./images/";
+  - var metas = {};
+  - metas.keywords = 'keywords';
+  - metas.description = 'description';
+
+doctype html
+html(lang='ja')
+  head
+    title Logo Generator
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name="descripttion", content=metas.description)
+    meta(name="keywords", content=metas.keywords)
+    script(type='text/javascript', src="main.js")
+
+  body
+    main.l-main
+      .l-main__header
+        +c-slider({ minValue: 0.1, maxValue: 10 })
+        +c-checkbox({ id: "test0", name: "check0", label: "Check"})
+        +c-radiobutton({ id: "radio", name: "radio0", label: "Radio"})

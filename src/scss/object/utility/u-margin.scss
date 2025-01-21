@@ -1,0 +1,101 @@
+
+@import "../../foundation/mixin";
+
+/**********************************************************
+ margin設定
+**********************************************************/
+
+.u-margin {
+	
+	/*******************************************
+	左マージン
+	*******************************************/
+	&__left {
+		&--10 {
+			margin-left: 10px;
+		}
+	}
+	
+	/*******************************************
+	右マージン
+	*******************************************/
+	&__right {
+		&--10 {
+			margin-right: 10px;
+		}
+		&--15 {
+			margin-right: 15px;
+		}
+	}
+	
+	/*******************************************
+	下マージン
+	*******************************************/
+	&__bottom {
+		&--5 {
+			margin-bottom: 5px;
+
+			&-sp {
+				@include tablet {
+					margin-bottom: 5px;
+				}
+			}
+		}
+		&--10 {
+			margin-bottom: 10px;
+		}
+		&--15 {
+			margin-bottom: 15px;
+		}
+		&--20 {
+			margin-bottom: 20px;
+		}
+		&--25 {
+			margin-bottom: 25px;
+		}
+		&--30 {
+			margin-bottom: 30px;
+		}
+		&--40 {
+			margin-bottom: 40px;
+		}
+		&--50 {
+			margin-bottom: 50px;
+		}
+		&--80 {
+			margin-bottom: 80px;
+		}
+		&--100 {
+			margin-bottom: 100px;
+		}
+		&--150 {
+			margin-bottom: 150px;
+		}
+		&--200 {
+			margin-bottom: 200px;
+		}
+		
+
+		&--30-sp {
+			@include tablet {
+				margin-bottom: 30px;
+			}
+		}
+		&--50-sp {
+			@include tablet {
+				margin-bottom: 50px;
+			}
+		}
+		&--70-sp {
+			@include tablet {
+				margin-bottom: 70px;
+			}
+		}
+		&--100-sp {
+			@include tablet {
+				margin-bottom: 100px;
+			}
+		}
+	}
+}
+

@@ -1,0 +1,8 @@
+
+//- チェックボックス
+
+mixin c-checkbox(args = { id: "", name: "", label: "" })
+  - var base = "c-checkbox";
+  div(class=base) 
+    input(type="checkbox", id=args.id)
+    label(for=args.id) !{args.label}

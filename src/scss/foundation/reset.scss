@@ -1,0 +1,114 @@
+@import './color.scss';
+@import './mixin.scss';
+
+/*************************************************
+ * Reset CSS
+ *************************************************/
+
+html,
+body {
+  height: 100%;
+}
+
+body,
+div,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+table,
+tr,
+td,
+section,
+article,
+ul,
+ol,
+li,
+dt,
+dd {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Hiragino Kaku Gothic Pro;
+  font-size: 1rem;
+  color: $color-black;
+  word-break: break-all;
+  overflow-x: hidden;
+  // background-color: #f00;
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+iframe {
+  border: none;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+// input,
+// button,
+// //select,
+// textarea {
+//   -webkit-appearance: none;
+//   -moz-appearance: none;
+//   appearance: none;
+//   background: transparent;
+//   border: none;
+//   border-radius: 0;
+//   outline: none;
+// }
+
+// textarea {
+//   resize: none;
+// }
+
+// input[type='checkbox'],
+// input[type='radio'] {
+//   display: none;
+// }
+
+// input[type='submit'],
+// input[type='button'],
+// label,
+// button,
+// select {
+//   cursor: pointer;
+// }
+
+select::-ms-expand {
+  display: none;
+}
+
+//iOSで文字入力・選択時の自動拡大（ズーム）表示を禁止
+body,
+input,
+textarea,
+select {
+  font-size: 16px;
+}
+
+a,
+button {
+}
