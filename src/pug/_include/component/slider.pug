@@ -1,7 +1,8 @@
 
 //- スライダー
 
-mixin c-slider(args = { minValue: 0, maxValue: 1 })
+mixin c-slider(args = { name: '', minValue: 0, maxValue: 1 })
   - var base = "c-slider";
-  div(class=base) 
-    p slider
+  div(class=base + " js-Slider", data-name=args.name, data-min=args.minValue, data-max=args.maxValue) 
+    div(class=base+"__bg") 
+    button(class=base+"__dragger js-SliderDragger") 

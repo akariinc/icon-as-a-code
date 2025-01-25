@@ -1,5 +1,3 @@
-
-
 @mixin tablet {
   @media only screen and (max-width: 768px) {
     @content;
@@ -11,23 +9,10 @@
   }
 }
 
-@mixin en {
-  font-family: 'Monda', sans-serif;
-  font-style: normal;
-  font-weight: normal;
-}
-
-@mixin shingo {
-  // font-family: A-OTF UD Shin Go Pro;
-  font-family: "UD新ゴ L", "UD Shin Go Light";
-  font-style: normal;
-  font-weight: normal;
-}
-
 @mixin base-padding {
   max-width: 1360px;
   padding: 0 40px;
-  margin:auto;
+  margin: auto;
   box-sizing: border-box;
 
   @include tablet {
@@ -35,4 +20,3 @@
     padding-left: 20px;
   }
 }
-

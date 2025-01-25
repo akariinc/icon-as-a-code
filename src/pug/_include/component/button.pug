@@ -1,0 +1,6 @@
+
+//- ボタン
+
+mixin c-button(args = { id: "", name: "", label: "" })
+  - var base = "c-button";
+  a(class=base, id=args.id, href="#") !{args.label}

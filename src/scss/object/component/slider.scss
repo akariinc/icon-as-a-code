@@ -1,0 +1,26 @@
+@import '../../foundation/color';
+@import '../../foundation/font';
+@import '../../foundation/reset';
+@import '../../foundation/variables';
+@import '../../foundation/mixin';
+
+.c-slider {
+  position: relative;
+  width: 120px;
+  height: 20px;
+
+  &__bg {
+    background-color: #ccc;
+    width: 100%;
+    height: 100%;
+  }
+  &__dragger {
+    background-color: #333;
+    width: 20px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+  }
+}

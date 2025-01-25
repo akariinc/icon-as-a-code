@@ -1,6 +1,7 @@
 include ./_include/component/slider
 include ./_include/component/checkbox
 include ./_include/component/radiobutton
+include ./_include/component/button
 
 block params
   - var path = "./images/";
@@ -19,9 +20,22 @@ html(lang='ja')
     meta(name="keywords", content=metas.keywords)
     script(type='text/javascript', src="main.js")
 
+  - var base = "l-main";
+
   body
-    main.l-main
-      .l-main__header
-        +c-slider({ minValue: 0.1, maxValue: 10 })
-        +c-checkbox({ id: "test0", name: "check0", label: "Check"})
-        +c-radiobutton({ id: "radio", name: "radio0", label: "Radio"})
+    main(class=base)
+      div(class=base + "__header")
+        h1 Logo Creator
+      div(class=base + "__side")
+        div(class=base + "__form-box")
+          +c-slider({ name:"param0", minValue: 0.1, maxValue: 10 })
+        div(class=base + "__form-box")
+          +c-slider({ name:"param1", minValue: 0, maxValue: 1 })
+        div(class=base + "__form-box")
+          +c-checkbox({ id: "test0", name: "check0", label: "Check"})
+        div(class=base + "__form-box")
+          +c-radiobutton({ id: "radio", name: "radio0", label: "Radio"})
+        div(class=base + "__form-box")
+          +c-button({ id:"button-execute", label: "実行する"})
+      div(class=base + "__body")
+        svg(class=base + "__svg", id="my-svg", xmlns="http://www.w3.org/2000/svg", width="26", height="26", viewBox="0 0 26 26")
