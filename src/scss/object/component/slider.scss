@@ -5,9 +5,20 @@
 @import '../../foundation/mixin';
 
 .c-slider {
-  position: relative;
-  width: 120px;
-  height: 20px;
+  &__columns {
+    display: flex;
+  }
+
+  &__left {
+    width: 120px;
+    height: 20px;
+    position: relative;
+  }
+
+  &__right {
+    flex: 1;
+    margin-left: 10px;
+  }
 
   &__bg {
     background-color: #ccc;

@@ -9,11 +9,16 @@ export class Slider {
 
   private dragger: HTMLElement;
 
+  private text: HTMLElement;
+
   constructor(element: HTMLElement) {
     this.min = parseFloat(element.dataset.min);
     this.max = parseFloat(element.dataset.max);
     this.bg = element.querySelector('.js-SliderBg') as HTMLElement;
     this.dragger = element.querySelector('.js-SliderDragger') as HTMLElement;
+    this.text = element.querySelector('.js-SliderText') as HTMLElement;
+
+    this.updateText(this.min);
 
     console.log(this.dragger, this.min, this.max);
 
@@ -26,19 +31,42 @@ export class Slider {
     let upFunc = null;
     let moveFunc = null;
 
-    let offsetX: number;
+    let mouseOffsetX: number;
+
+    const bgRect: DOMRect = this.bg.getBoundingClientRect();
 
     this.dragger.addEventListener('mousedown', (e: MouseEvent) => {
-      const width: number = this.bg.getBoundingClientRect().width;
+      const draggerRect: DOMRect = this.dragger.getBoundingClientRect();
+      const bgX: number = bgRect.x;
+      const minX: number = bgRect.x;
+      const maxX: number = bgRect.x + bgRect.width - draggerRect.width;
+
+      console.log(draggerRect.width);
 
       const [x, y] = getMousePosition(e);
-      offsetX = x;
+      mouseOffsetX = x - draggerRect.x;
 
       window.addEventListener(
         'mousemove',
         (moveFunc = (e2: MouseEvent) => {
           const [x, y] = getMousePosition(e2);
-          console.log(offsetX, x);
+
+          let per = (x - mouseOffsetX - minX) / (maxX - minX);
+
+          if (per < 0) {
+            per = 0;
+          } else if (per > 1) {
+            per = 1;
+          }
+          console.log(per);
+
+          // this.dragger.style.left = 'calc(' + (per * 100) + '% - ' + draggerRect.width + 'px)';
+          this.dragger.style.transform = 'translateX(' + (per * (maxX - minX)) + 'px)';
+
+          this.updateText((this.max - this.min) * per + this.min);
+
+          e2.preventDefault();
+          return false;
         })
       );
 
@@ -50,5 +78,11 @@ export class Slider {
         })
       );
     });
+  }
+
+
+  private updateText(per: number): void {
+    const value: string = per.toString().slice(0, 5);
+    this.text.textContent = value;
   }
 }

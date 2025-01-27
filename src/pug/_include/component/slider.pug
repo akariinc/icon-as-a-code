@@ -4,5 +4,9 @@
 mixin c-slider(args = { name: '', minValue: 0, maxValue: 1 })
   - var base = "c-slider";
   div(class=base + " js-Slider", data-name=args.name, data-min=args.minValue, data-max=args.maxValue) 
-    div(class=base+"__bg js-SliderBg") 
-    button(class=base+"__dragger js-SliderDragger") 
+    div(class=base + "__columns")
+      div(class=base + "__left")
+        div(class=base+"__bg js-SliderBg") 
+        button(class=base+"__dragger js-SliderDragger") 
+      div(class=base + "__right")
+        p(class=base + "__text js-SliderText") 0
