@@ -26,10 +26,17 @@ export class Controller {
 
 
   private createUI() {
+
+    // Slider UI
     const sliders: NodeListOf<HTMLElement> = document.querySelectorAll('.js-Slider');
 
     for (var i = 0; i < sliders.length; i++) {
-      new Slider(sliders[i]);
+      const slider: Slider = new Slider(sliders[i]);
+      slider.onChange = (name: string, value: number) => {
+        console.log(name, value);
+        this.creator.props[name] = value;
+        this.creator.update();
+      };
     }
   }
 }

@@ -1,3 +1,4 @@
+import { LogoProperty } from "../../info/LogoProperty";
 import { Container } from "./Container";
 import { Line } from "./Line";
 
@@ -5,10 +6,24 @@ export class Creator {
 
   public svg: HTMLElement;
 
+  public props: LogoProperty;
+
+  private container: Container;
+
   constructor() {
 
     const parent: HTMLElement = document.getElementById('my-svg');
     this.svg = parent;
+
+    this.props = {
+      onlyCircle: false,
+      drawProgress: 0,
+      innerRadius: 0,
+      outerRadius: 0,
+      shapeType: 'iris',
+      partAngle: 1,
+      mask: false
+    };
 
     // this.element = document.createElementNS('http://www.w3.org/2000/svg', "rect");
 
@@ -21,21 +36,35 @@ export class Creator {
 
     // parent.appendChild(this.element);
 
-    const container: Container = new Container();
-    parent.appendChild(container.element);
+    this.container = new Container();
+    parent.appendChild(this.container.element);
 
-    const div = 72;
-    const per = 6.28 / div;
+    this.update();
+  }
+
+
+  public update(): void {
+    console.log('update');
+
+    this.removeChildren(this.container.element);
+
+    const rad: number = this.props.partAngle / 180 * Math.PI;
+    const div = 6.28 / rad;
 
     for (var i = 0; i < div; i++) {
-      const line: Line = new Line(per * i);
-      container.element.appendChild(line.element);
+      const line: Line = new Line(rad * i);
+      this.container.element.appendChild(line.element);
     }
   }
 
+  /*
+   * 子要素をすべて削除
+   */
+  private removeChildren = (element: SVGElement): void => {
 
-  public export(): void {
-    console.log('export');
-  }
+    while (element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
+  };
 }
 

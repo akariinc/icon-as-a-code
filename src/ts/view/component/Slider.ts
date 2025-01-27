@@ -5,15 +5,20 @@ export class Slider {
 
   private max: number;
 
+  private name: string;
+
   private bg: HTMLElement;
 
   private dragger: HTMLElement;
 
   private text: HTMLElement;
 
+  public onChange?: (name: string, value: number) => void;
+
   constructor(element: HTMLElement) {
     this.min = parseFloat(element.dataset.min);
     this.max = parseFloat(element.dataset.max);
+    this.name = element.dataset.name;
     this.bg = element.querySelector('.js-SliderBg') as HTMLElement;
     this.dragger = element.querySelector('.js-SliderDragger') as HTMLElement;
     this.text = element.querySelector('.js-SliderText') as HTMLElement;
@@ -63,7 +68,13 @@ export class Slider {
           // this.dragger.style.left = 'calc(' + (per * 100) + '% - ' + draggerRect.width + 'px)';
           this.dragger.style.transform = 'translateX(' + (per * (maxX - minX)) + 'px)';
 
-          this.updateText((this.max - this.min) * per + this.min);
+          const value = (this.max - this.min) * per + this.min;
+
+          this.updateText(value);
+
+          if (this.onChange) {
+            this.onChange(this.name, value);
+          }
 
           e2.preventDefault();
           return false;

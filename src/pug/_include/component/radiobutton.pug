@@ -1,8 +1,11 @@
 
 //- ラジオボタン
 
-mixin c-radiobutton(args = { id: "", name: "", label: "" })
+mixin c-radiobutton(args = { id: "", name: "", label: "", selected: false })
   - var base = "c-radio";
   div(class=base) 
-    input(type="radio", id=args.id)
+    - if (args.selected)
+      input(type="radio", id=args.id, name=args.name, checked)
+    - else
+      input(type="radio", id=args.id, name=args.name)
     label(for=args.id) !{args.label}
