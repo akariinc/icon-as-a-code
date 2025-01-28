@@ -1,6 +1,7 @@
 import { LogoProperty } from "../../info/LogoProperty";
 import { Container } from "./Container";
 import { Line } from "./Line";
+import { Tail } from "./Tail";
 
 export class Creator {
 
@@ -9,6 +10,10 @@ export class Creator {
   public props: LogoProperty;
 
   private container: Container;
+
+  private lines: Line[];
+
+  private tail: Tail;
 
   constructor() {
 
@@ -52,9 +57,12 @@ export class Creator {
     const div = 6.28 / rad;
 
     for (var i = 0; i < div; i++) {
-      const line: Line = new Line(rad * i);
+      const line: Line = new Line(this.props.outerRadius, this.props.innerRadius, rad * i);
       this.container.element.appendChild(line.element);
     }
+
+    this.tail = new Tail(this.props.outerRadius, this.props.innerRadius);
+    this.container.element.appendChild(this.tail.element);
   }
 
   /*
