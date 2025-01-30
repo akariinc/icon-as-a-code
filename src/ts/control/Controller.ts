@@ -1,3 +1,4 @@
+import { ColorPicker } from "../view/component/ColorPicker";
 import { Slider } from "../view/component/Slider";
 import { Creator } from "../view/logo/Creator";
 
@@ -7,36 +8,60 @@ export class Controller {
 
   constructor() {
     this.creator = new Creator();
-    this.createUI();
+    this.setUIEvent();
 
-    const buttonExecute: HTMLElement = document.getElementById('button-execute');
-
-    const svg = this.creator.svg.outerHTML;
-
-    var url = "data:text/plain;charset=utf-8," + encodeURIComponent(svg);
-    buttonExecute.setAttribute("download", 'logo.svg');
-    buttonExecute.setAttribute("href", url);
-
-    buttonExecute.addEventListener('click', () => {
-      // this.creator.export();
-    });
-
-    console.log(svg);
+    // console.log(svg);
   }
 
 
-  private createUI() {
+  private setUIEvent() {
 
     // Slider UI
     const sliders: NodeListOf<HTMLElement> = document.querySelectorAll('.js-Slider');
 
     for (var i = 0; i < sliders.length; i++) {
-      const slider: Slider = new Slider(sliders[i]);
-      slider.onChange = (name: string, value: number) => {
+      if (sliders[i].dataset.noevent != 'true') {
+        const slider: Slider = new Slider(sliders[i]);
+        slider.onChange = (name: string, value: number) => {
+          console.log(name, value);
+          this.creator.props[name] = value;
+          this.creator.update();
+        };
+      }
+    }
+
+    // CheckBox
+
+    const checkboxes: NodeListOf<HTMLInputElement> = document.querySelectorAll('.js-Checkbox');
+
+    for (var i = 0; i < checkboxes.length; i++) {
+      const check: HTMLInputElement = checkboxes[i];
+      check.addEventListener('change', () => {
+        console.log(check.dataset.name, check.checked);
+        const name = check.dataset.name;
+        this.creator.props[name] = check.checked;
+        this.creator.update();
+      });
+    }
+
+    // ColorPicker
+
+    const pickers: NodeListOf<HTMLElement> = document.querySelectorAll('.js-ColorPicker');
+
+    for (var i = 0; i < pickers.length; i++) {
+      const picker: ColorPicker = new ColorPicker(pickers[i]);
+      picker.onChange = (name: string, value: string) => {
         console.log(name, value);
         this.creator.props[name] = value;
         this.creator.update();
       };
     }
+
+
+    const zoom: Slider = new Slider(document.getElementById('zoom'));
+    zoom.onChange = (name: string, value: number) => {
+      console.log(value);
+      this.creator.svg.style.transform = 'scale(' + value + ')';
+    };
   }
 }

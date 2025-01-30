@@ -15,6 +15,8 @@ export class Slider {
 
   public onChange?: (name: string, value: number) => void;
 
+  public value: number;
+
   constructor(element: HTMLElement) {
     this.min = parseFloat(element.dataset.min);
     this.max = parseFloat(element.dataset.max);
@@ -23,9 +25,11 @@ export class Slider {
     this.dragger = element.querySelector('.js-SliderDragger') as HTMLElement;
     this.text = element.querySelector('.js-SliderText') as HTMLElement;
 
+    this.value = this.min;
+
     this.updateText(this.min);
 
-    console.log(this.dragger, this.min, this.max);
+    // console.log(this.dragger, this.min, this.max);
 
     if (this.dragger) {
       this.setEvent();
@@ -46,7 +50,7 @@ export class Slider {
       const minX: number = bgRect.x;
       const maxX: number = bgRect.x + bgRect.width - draggerRect.width;
 
-      console.log(draggerRect.width);
+      // console.log(draggerRect.width);
 
       const [x, y] = getMousePosition(e);
       mouseOffsetX = x - draggerRect.x;
@@ -63,7 +67,7 @@ export class Slider {
           } else if (per > 1) {
             per = 1;
           }
-          console.log(per);
+          // console.log(per);
 
           // this.dragger.style.left = 'calc(' + (per * 100) + '% - ' + draggerRect.width + 'px)';
           this.dragger.style.transform = 'translateX(' + (per * (maxX - minX)) + 'px)';
@@ -71,6 +75,8 @@ export class Slider {
           const value = (this.max - this.min) * per + this.min;
 
           this.updateText(value);
+
+          this.value = value;
 
           if (this.onChange) {
             this.onChange(this.name, value);

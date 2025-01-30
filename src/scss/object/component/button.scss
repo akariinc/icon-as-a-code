@@ -1,0 +1,18 @@
+@import '../../foundation/color';
+@import '../../foundation/font';
+@import '../../foundation/reset';
+@import '../../foundation/variables';
+@import '../../foundation/mixin';
+
+.c-button {
+  background-color: #333;
+  display: block;
+  text-align: center;
+  color: #fff;
+  padding: 15px 0;
+  transition: background 0.1s linear;
+
+  &:hover {
+    background-color: #666;
+  }
+}

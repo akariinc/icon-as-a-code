@@ -1,0 +1,18 @@
+@import '../../foundation/color';
+@import '../../foundation/font';
+@import '../../foundation/reset';
+@import '../../foundation/variables';
+@import '../../foundation/mixin';
+
+.c-colorpicker {
+  position: relative;
+
+  &__chip {
+    width: 30px;
+    height: 15px;
+    background-color: #ccc;
+    position: absolute;
+    right: 50px;
+    top: 5px;
+  }
+}

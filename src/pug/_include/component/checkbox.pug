@@ -4,5 +4,5 @@
 mixin c-checkbox(args = { id: "", name: "", label: "" })
   - var base = "c-checkbox";
   div(class=base) 
-    input(type="checkbox", id=args.id)
+    input(type="checkbox", id=args.id, class="js-Checkbox", data-name=args.label)
     label(for=args.id) !{args.label}

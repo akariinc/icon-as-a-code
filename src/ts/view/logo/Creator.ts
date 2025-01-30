@@ -15,6 +15,8 @@ export class Creator {
 
   private tail: Tail;
 
+  private buttonDownload: HTMLElement;
+
   constructor() {
 
     const parent: HTMLElement = document.getElementById('my-svg');
@@ -27,7 +29,13 @@ export class Creator {
       outerRadius: 0,
       shapeType: 'iris',
       partAngle: 1,
-      mask: false
+      mask: false,
+
+      opacityStart: 0,
+      opacityEnd: 0,
+
+      rgbStart: '',
+      rgbEnd: ''
     };
 
     // this.element = document.createElementNS('http://www.w3.org/2000/svg', "rect");
@@ -44,6 +52,13 @@ export class Creator {
     this.container = new Container();
     parent.appendChild(this.container.element);
 
+
+    this.buttonDownload = document.getElementById('button-execute');
+    this.buttonDownload.setAttribute("download", 'logo.svg');
+    // this.buttonDownload.addEventListener('click', () => {
+    //   // this.creator.export();
+    // });
+
     this.update();
   }
 
@@ -53,6 +68,11 @@ export class Creator {
 
     this.removeChildren(this.container.element);
 
+    if (!this.props.onlyCircle) {
+      this.tail = new Tail(this.props);
+      this.container.element.appendChild(this.tail.element);
+    }
+
     const rad: number = this.props.partAngle / 180 * Math.PI;
     const div = 6.28 / rad;
 
@@ -61,8 +81,9 @@ export class Creator {
       this.container.element.appendChild(line.element);
     }
 
-    this.tail = new Tail(this.props.outerRadius, this.props.innerRadius);
-    this.container.element.appendChild(this.tail.element);
+    const svg = this.svg.outerHTML;
+    var url = "data:text/plain;charset=utf-8," + encodeURIComponent(svg);
+    this.buttonDownload.setAttribute("href", url);
   }
 
   /*

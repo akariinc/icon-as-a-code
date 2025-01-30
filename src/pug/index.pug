@@ -1,6 +1,7 @@
 include ./_include/component/slider
 include ./_include/component/checkbox
 include ./_include/component/radiobutton
+include ./_include/component/colorpicker
 include ./_include/component/button
 
 block params
@@ -38,6 +39,21 @@ html(lang='ja')
         div(class=base + "__form-box")
           +c-slider({ name:"partAngle", minValue: 1, maxValue: 24 })
 
+        hr
+          
+        div(class=base + "__form-box")
+          +c-slider({ name:"opacityStart", minValue: 0, maxValue: 1 })
+        div(class=base + "__form-box")
+          +c-slider({ name:"opacityEnd", minValue: 0, maxValue: 1 })
+
+        hr
+          
+        div(class=base + "__form-box")
+          +c-colorpicker({ id: "picker0", name:"rgbStart", label: "RGB" })
+          
+        div(class=base + "__form-box")
+          +c-colorpicker({ id: "picker1", name:"rgbEnd", label: "RGB2" })
+
         div(class=base + "__form-box")
           div(class=base + "__radio-group")
             +c-radiobutton({ id: "radio0", name: "radio", label: "iris", selected: true})
@@ -45,6 +61,11 @@ html(lang='ja')
             +c-radiobutton({ id: "radio2", name: "radio", label: "paint"})
 
         div(class=base + "__form-box")
-          +c-button({ id:"button-execute", label: "実行する"})
+          +c-button({ id:"button-execute", label: "ダウンロード"})
+
+        hr
+        div(class=base + "__form-box")
+          +c-slider({ id: 'zoom', name:"Zoom", minValue: 1, maxValue: 20, noEventHandling: 'true' })
+
       div(class=base + "__body")
         svg(class=base + "__svg", id="my-svg", xmlns="http://www.w3.org/2000/svg", width="26", height="26", viewBox="0 0 26 26")

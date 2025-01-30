@@ -6,4 +6,10 @@ export interface LogoProperty {
   shapeType: 'iris' | 'fan' | 'paint';
   partAngle: number;
   mask: boolean;
+
+  opacityStart: number;
+  opacityEnd: number;
+
+  rgbStart: string;
+  rgbEnd: string;
 };
