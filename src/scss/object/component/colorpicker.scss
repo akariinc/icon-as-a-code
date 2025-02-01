@@ -15,4 +15,12 @@
     right: 50px;
     top: 5px;
   }
+
+  &__columns {
+    display: flex;
+  }
+
+  &__left {
+    margin-right: 10px;
+  }
 }

@@ -6,7 +6,12 @@ mixin c-colorpicker(args = { id: "", name: "", label: "" })
   - var base = "c-colorpicker";
   div(class=base + " js-ColorPicker", id=args.id, data-name=args.name)
     p #{args.name}
-    +c-slider({ name:"R", minValue: 0, maxValue: 1, nolabel: true, noEventHandling: 'true' })
-    +c-slider({ name:"G", minValue: 0, maxValue: 1, nolabel: true, noEventHandling: 'true' })
-    +c-slider({ name:"B", minValue: 0, maxValue: 1, nolabel: true, noEventHandling: 'true' })
-    div(class=base + "__chip js-chip")
+    //- +c-slider({ name:"R", minValue: 0, maxValue: 1, nolabel: true, noEventHandling: 'true' })
+    //- +c-slider({ name:"G", minValue: 0, maxValue: 1, nolabel: true, noEventHandling: 'true' })
+    //- +c-slider({ name:"B", minValue: 0, maxValue: 1, nolabel: true, noEventHandling: 'true' })
+    //- div(class=base + "__chip js-chip")
+    div(class=base + "__columns")
+      div(class=base + "__left")
+        input(type="color")
+      div(class=base + "__right")
+        p(class=babse + "__text js-text") #ffffff
