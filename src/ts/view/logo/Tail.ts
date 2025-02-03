@@ -1,18 +1,17 @@
-import { LogoProperty } from "../../info/LogoProperty";
-import { ShapeBase } from "./ShapeBase";
+import { LogoProperty } from '../../info/LogoProperty';
+import { ShapeBase } from './common/ShapeBase';
 
 export class Tail extends ShapeBase {
-
   constructor(props: LogoProperty) {
     super();
 
-    this.element = document.createElementNS('http://www.w3.org/2000/svg', "g");
+    this.element = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 
-    const defs: SVGDefsElement = document.createElementNS('http://www.w3.org/2000/svg', "defs");
-    const grad: SVGLinearGradientElement = document.createElementNS('http://www.w3.org/2000/svg', "linearGradient");
+    const defs: SVGDefsElement = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+    const grad: SVGLinearGradientElement = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');
 
-    const stop0: SVGStopElement = document.createElementNS('http://www.w3.org/2000/svg', "stop");
-    const stop1: SVGStopElement = document.createElementNS('http://www.w3.org/2000/svg', "stop");
+    const stop0: SVGStopElement = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
+    const stop1: SVGStopElement = document.createElementNS('http://www.w3.org/2000/svg', 'stop');
 
     grad.setAttribute('id', 'grad');
     grad.setAttribute('x1', '0');
@@ -49,17 +48,16 @@ export class Tail extends ShapeBase {
     const outer: number = props.outerRadius;
     const inner: number = props.innerRadius;
 
-    const rect = document.createElementNS('http://www.w3.org/2000/svg', "rect");
+    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
     this.setAttributes(rect, {
-      "width": outer - inner,
-      "height": outer,
-      "fill": "url(#grad)",
-      "opacity": 0.7,
-      "transform": 'translate(' + inner + ', 0)'
+      width: outer - inner,
+      height: outer,
+      fill: 'url(#grad)',
+      opacity: 0.7,
+      transform: 'translate(' + inner + ', 0)',
     });
 
     this.element.appendChild(defs);
     this.element.appendChild(rect);
   }
 }
-

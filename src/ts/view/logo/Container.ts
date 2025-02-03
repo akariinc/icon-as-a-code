@@ -1,14 +1,12 @@
-import { ShapeBase } from "./ShapeBase";
+import { ShapeBase } from './common/ShapeBase';
 
 export class Container extends ShapeBase {
-
   constructor() {
     super();
 
-    this.element = document.createElementNS('http://www.w3.org/2000/svg', "g");
+    this.element = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     this.setAttributes(this.element, {
-      'transform': 'translate(13, 13)'
+      transform: 'translate(13, 13)',
     });
   }
 }
-
