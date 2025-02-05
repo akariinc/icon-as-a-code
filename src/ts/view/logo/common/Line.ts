@@ -1,4 +1,4 @@
-import { ShapeBase } from './common/ShapeBase';
+import { ShapeBase } from './ShapeBase';
 
 export class Line extends ShapeBase {
   constructor(outer: number, inner: number, rotation: number) {

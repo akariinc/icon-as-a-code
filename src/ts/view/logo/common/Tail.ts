@@ -1,5 +1,5 @@
-import { LogoProperty } from '../../info/LogoProperty';
-import { ShapeBase } from './common/ShapeBase';
+import { LogoProperty } from '../../../info/LogoProperty';
+import { ShapeBase } from './ShapeBase';
 
 export class Tail extends ShapeBase {
   constructor(props: LogoProperty) {

@@ -1,4 +1,4 @@
-import { ShapeBase } from './common/ShapeBase';
+import { ShapeBase } from './ShapeBase';
 
 export class Container extends ShapeBase {
   constructor() {

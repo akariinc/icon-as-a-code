@@ -3,7 +3,7 @@ export interface LogoProperty {
   drawProgress: number;
   innerRadius: number;
   outerRadius: number;
-  shapeType: 'iris' | 'fan' | 'paint';
+  // shapeType: 'iris' | 'paint';
   partAngle: number;
   mask: boolean;
 

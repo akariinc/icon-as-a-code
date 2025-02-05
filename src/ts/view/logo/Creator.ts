@@ -1,7 +1,7 @@
 import { LogoProperty } from "../../info/LogoProperty";
-import { Container } from "./Container";
-import { Line } from "./Line";
-import { Tail } from "./Tail";
+import { Container } from "./common/Container";
+import { Line } from "./common/Line";
+import { Tail } from "./common/Tail";
 
 export class Creator {
 
@@ -27,7 +27,7 @@ export class Creator {
       drawProgress: 0,
       innerRadius: 0,
       outerRadius: 0,
-      shapeType: 'iris',
+      // shapeType: 'iris',
       partAngle: 1,
       mask: false,
 
