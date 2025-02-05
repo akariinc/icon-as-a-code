@@ -1,12 +1,11 @@
-import { ColorPicker } from "../view/component/ColorPicker";
-import { Slider } from "../view/component/Slider";
-import { CreatorBase } from "../view/logo/common/CreatorBase";
-import { Creator } from "../view/logo/Creator";
-import { CreatorIris } from "../view/logo/iris/CreatorIris";
-import { CreatorPaint } from "../view/logo/paint/CreatorPaint";
+import { ColorPicker } from '../view/component/ColorPicker';
+import { Slider } from '../view/component/Slider';
+import { CreatorBase } from '../view/logo/common/CreatorBase';
+import { Creator } from '../view/logo/Creator';
+import { CreatorIris } from '../view/logo/iris/CreatorIris';
+import { CreatorPaint } from '../view/logo/paint/CreatorPaint';
 
 export class Controller {
-
   private selectCreator: CreatorBase;
 
   private creatorIris: CreatorIris;
@@ -26,9 +25,7 @@ export class Controller {
     // console.log(svg);
   }
 
-
   private setUIEvent() {
-
     // Slider UI
     const sliders: NodeListOf<HTMLElement> = document.querySelectorAll('.js-Slider');
 
@@ -89,7 +86,6 @@ export class Controller {
         this.selectCreator.update();
       });
     }
-
 
     const zoom: Slider = new Slider(document.getElementById('zoom'));
     zoom.onChange = (name: string, value: number) => {

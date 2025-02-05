@@ -1,19 +1,16 @@
-import { CreatorBase } from "../common/CreatorBase";
-import { Line } from "../common/Line";
-import { Tail } from "../common/Tail";
+import { CreatorBase } from '../common/CreatorBase';
+import { Line } from '../common/Line';
+import { Tail } from '../common/Tail';
 
 export class CreatorIris extends CreatorBase {
-
   private lines: Line[];
 
   private tail: Tail;
 
   constructor() {
-
     super();
     this.update();
   }
-
 
   public update(): void {
     console.log('update iris');
@@ -25,7 +22,7 @@ export class CreatorIris extends CreatorBase {
       this.container.element.appendChild(this.tail.element);
     }
 
-    const rad: number = this.props.partAngle / 180 * Math.PI;
+    const rad: number = (this.props.partAngle / 180) * Math.PI;
     const div = 6.28 / rad;
 
     for (var i = 0; i < div; i++) {
@@ -36,4 +33,3 @@ export class CreatorIris extends CreatorBase {
     this.updateDownloadHref();
   }
 }
-
