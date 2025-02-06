@@ -2,7 +2,6 @@ import { LogoProperty } from '../info/LogoProperty';
 import { ColorPicker } from '../view/component/ColorPicker';
 import { Slider } from '../view/component/Slider';
 import { CreatorBase } from '../view/logo/common/CreatorBase';
-import { Creator } from '../view/logo/Creator';
 import { CreatorIris } from '../view/logo/iris/CreatorIris';
 import { CreatorPaint } from '../view/logo/paint/CreatorPaint';
 

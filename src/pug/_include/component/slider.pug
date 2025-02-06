@@ -1,13 +1,14 @@
 
 //- スライダー
 
-mixin c-slider(args = { id: '', name: '', minValue: 0, maxValue: 1, value: 0, nolabel: false, noEventHandling: false })
+mixin c-slider(args = { id: '', name: '', minValue: 0, maxValue: 1, value: 0, nolabel: false, noEventHandling: false, step: 0.01 })
   - var base = "c-slider";
+  - var step = (args.step) ? args.step : 0.01;
   div(class=base + " js-Slider", id=args.id, data-name=args.name, data-min=args.minValue, data-max=args.maxValue, data-noevent=args.noEventHandling) 
     - if (!args.nolabel)
       p #{args.name} 
         span(class=base + "__text js-SliderText") 0
-    input(type="range", min=args.minValue, max=args.maxValue, step="0.01", value=args.value)
+    input(type="range", min=args.minValue, max=args.maxValue, step=step, value=args.value)
     //- div(class=base + "__columns")
     //-   div(class=base + "__left")
     //-     div(class=base+"__bg js-SliderBg") 

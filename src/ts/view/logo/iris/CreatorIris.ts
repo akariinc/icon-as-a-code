@@ -1,4 +1,5 @@
 import { LogoProperty } from '../../../info/LogoProperty';
+import { getColorPercent } from '../../../util/color';
 import { removeChildren } from '../../../util/element';
 import { CreatorBase } from '../common/CreatorBase';
 import { IrisLine } from './IrisLine';
@@ -25,6 +26,7 @@ export class CreatorIris extends CreatorBase {
     console.log('update iris', props.lineTickness);
 
     removeChildren(this.container.element);
+    removeChildren(this.lineContainer);
     this.container.element.appendChild(this.lineContainer);
 
     if (!props.onlyCircle) {
@@ -35,13 +37,13 @@ export class CreatorIris extends CreatorBase {
     // const rad: number = (props.partAngle / 180) * Math.PI;
     // const div = 6.28 / rad;
 
-    const div = props.division;
-    const rad = 6.28 / div;
+    // const div = props.division;
+    // const rad = 6.28 / div;
 
-    for (var i = 0; i < div; i++) {
-      const line: LineSimple = new LineSimple(props.outerRadius, props.innerRadius, rad * i, props.lineTickness);
-      this.container.element.appendChild(line.element);
-    }
+    // for (var i = 0; i < div; i++) {
+    //   const line: LineSimple = new LineSimple(props.outerRadius, props.innerRadius, rad * i, props.lineTickness);
+    //   this.container.element.appendChild(line.element);
+    // }
 
     // if (!props.onlyCircle) {
     //   this.tail.draw(
@@ -57,17 +59,29 @@ export class CreatorIris extends CreatorBase {
     //   this.container.element.removeChild(this.tail.element);
     // }
 
+    // ラインの幅
     const width: number = props.outerRadius - props.innerRadius;
+    // ラインの高さ（太さ）
     const height: number = props.lineTickness;
+
+    // 半径（ドーナツ中央の位置の半径）
     const dis: number = width * 0.5 + props.innerRadius;
+
+    // ドーナツ中央の位置を通る円の円周
     const aroundDis: number = dis * 2 * Math.PI;
-    const allDis: number = aroundDis + props.outerRadius;
 
-    const offsetX = -width / 2;
-    const offsetY = -height / 2;
+    // 尻尾も含めたトータルの距離
+    const allDis: number = (props.onlyCircle) ? aroundDis : aroundDis + props.outerRadius;
 
-    const test: IrisLine = new IrisLine(width, height, dis, 0.45);
-    this.lineContainer.appendChild(test.element);
+    // const offsetX = -width / 2;
+    // const offsetY = -height / 2;
+
+    for (var i = 0; i < props.division; i++) {
+      const per = (i + 1) / props.division;// * (aroundDis / allDis);
+      const color: string = getColorPercent(props.rgbStart, props.rgbEnd, per);
+      const test: IrisLine = new IrisLine(color, width, height, dis, aroundDis, allDis, props.outerRadius, per);
+      this.lineContainer.appendChild(test.element);
+    }
 
     // this.lineContainer.setAttribute('transform', 'translate(' + offsetX + ', ' + offsetY + ')');
 
