@@ -3,7 +3,7 @@ import { Container } from "./Container";
 
 export class CreatorBase {
 
-  public props: LogoProperty;
+  // public props: LogoProperty;
 
   public svg: HTMLElement;
 
@@ -18,21 +18,21 @@ export class CreatorBase {
     this.container = new Container();
     this.svg = this.parent;
 
-    this.props = {
-      onlyCircle: false,
-      drawProgress: 0,
-      innerRadius: 0,
-      outerRadius: 0,
-      // shapeType: 'iris',
-      partAngle: 1,
-      mask: false,
+    // this.props = {
+    //   onlyCircle: false,
+    //   drawProgress: 0,
+    //   innerRadius: 0,
+    //   outerRadius: 0,
+    //   // shapeType: 'iris',
+    //   partAngle: 1,
+    //   mask: false,
 
-      opacityStart: 0,
-      opacityEnd: 0,
+    //   opacityStart: 0,
+    //   opacityEnd: 0,
 
-      rgbStart: '',
-      rgbEnd: ''
-    };
+    //   rgbStart: '',
+    //   rgbEnd: ''
+    // };
 
     this.parent.appendChild(this.container.element);
 
@@ -40,7 +40,7 @@ export class CreatorBase {
     this.buttonDownload.setAttribute("download", 'logo.svg');
   }
 
-  public update(): void {
+  public update(props: LogoProperty): void {
     //
   }
 

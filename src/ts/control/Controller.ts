@@ -1,3 +1,4 @@
+import { LogoProperty } from '../info/LogoProperty';
 import { ColorPicker } from '../view/component/ColorPicker';
 import { Slider } from '../view/component/Slider';
 import { CreatorBase } from '../view/logo/common/CreatorBase';
@@ -14,14 +15,34 @@ export class Controller {
 
   private sideUI: HTMLElement;
 
+  private props: LogoProperty;
+
   constructor() {
     this.sideUI = document.querySelector('.js-side') as HTMLElement;
+
+    this.props = {
+      onlyCircle: false,
+      drawProgress: 0,
+      innerRadius: 0,
+      outerRadius: 0,
+      // shapeType: 'iris',
+      partAngle: 1,
+      mask: false,
+
+      opacityStart: 0,
+      opacityEnd: 0,
+
+      rgbStart: '',
+      rgbEnd: ''
+    };
 
     this.creatorIris = new CreatorIris();
     this.creatorPaint = new CreatorPaint();
     this.selectCreator = this.creatorIris;
     this.setUIEvent();
 
+    this.selectCreator.update(this.props);
+    this.creatorPaint.update(this.props);
     // console.log(svg);
   }
 
@@ -34,9 +55,10 @@ export class Controller {
         const slider: Slider = new Slider(sliders[i]);
         slider.onChange = (name: string, value: number) => {
           console.log(name, value);
-          this.selectCreator.props[name] = value;
-          this.selectCreator.update();
+          this.props[name] = value;
+          this.selectCreator.update(this.props);
         };
+        this.props[slider.name] = slider.value;
       }
     }
 
@@ -49,8 +71,8 @@ export class Controller {
       check.addEventListener('change', () => {
         console.log(check.dataset.name, check.checked);
         const name = check.dataset.name;
-        this.selectCreator.props[name] = check.checked;
-        this.selectCreator.update();
+        this.props[name] = check.checked;
+        this.selectCreator.update(this.props);
       });
     }
 
@@ -62,9 +84,10 @@ export class Controller {
       const picker: ColorPicker = new ColorPicker(pickers[i]);
       picker.onChange = (name: string, value: string) => {
         console.log(name, value);
-        this.selectCreator.props[name] = value;
-        this.selectCreator.update();
+        this.props[name] = value;
+        this.selectCreator.update(this.props);
       };
+      this.props[picker.name] = picker.value;
     }
 
     const typeRadios: NodeListOf<HTMLInputElement> = document.querySelectorAll('.js-radio-type input');
@@ -83,7 +106,7 @@ export class Controller {
           this.selectCreator = this.creatorPaint;
         }
 
-        this.selectCreator.update();
+        this.selectCreator.update(this.props);
       });
     }
 
@@ -92,5 +115,6 @@ export class Controller {
       console.log(value);
       this.selectCreator.svg.style.transform = 'scale(' + value + ')';
     };
+    this.selectCreator.svg.style.transform = 'scale(' + zoom.value + ')';
   }
 }

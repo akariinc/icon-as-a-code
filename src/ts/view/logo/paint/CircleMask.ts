@@ -1,42 +1,50 @@
 import { ShapeBase } from '../common/ShapeBase';
 
 export class CircleMask extends ShapeBase {
-  constructor(innerRadius: number, outerRadius: number) {
+  constructor() {
     super();
 
-    // this.element = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    // this.setAttributes(this.element, {
-    //   r: '10',
-    //   stroke: '#000000',
-    //   strokeWidth: '2',
-    //   fill: 'none',
-    // });
-
-    const width = outerRadius - innerRadius;
-
-    // 円周の長さ
-    const round = (13 - width) * Math.PI;
-
-    const r = round / (2 * Math.PI);
-
-    this.element = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    this.element.setAttribute('fill', 'none');
-    this.element.setAttribute('stroke', '#000000');
-    this.element.setAttribute('stroke-width', width.toString());
-    this.element.setAttribute(
-      'd',
-      `M20 ${(40 - (r + r)) / 2}
-        a ${r} ${r} 0 0 1 0 ${r + r}
-        a ${r} ${r} 0 0 1 0 -${r + r}`
-    );
-    this.element.setAttribute('stroke-dasharray', round * 1 + ' ' + round);
-
+    this.element = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     this.setAttributes(this.element, {
-      opacity: '0.5',
-      transform: 'translate(-20, -20)',
+      id: 'circle',
+      // opacity: '0.5',
+      fill: '#000000',
     });
     /*
-		<path
+        // ドーナツの幅 (太さ)
+        const width = outerRadius - innerRadius;
+    
+        // 円周の長さ
+        const round = (outerRadius + innerRadius) * Math.PI;
+    
+        // console.log('width', width, 'round', round);
+    
+        // 半径
+        const r = round / (2 * Math.PI);
+    
+        // 描画割合 (0 - 1)
+        const per = 1;
+    
+        this.element = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        this.element.setAttribute('fill', 'none');
+        this.element.setAttribute('stroke', '#000000');
+        this.element.setAttribute('stroke-width', width.toString());
+        this.element.setAttribute(
+          'd',
+          `M20 ${(40 - (r + r)) / 2}
+            a ${r} ${r} 0 0 1 0 ${r + r}
+            a ${r} ${r} 0 0 1 0 -${r + r}`
+        );
+        this.element.setAttribute('stroke-dasharray', round * per + ' ' + round);
+    
+        this.setAttributes(this.element, {
+          id: 'circle',
+          opacity: '0.5',
+          transform: 'rotate(90) translate(-20, -20)',
+        });
+    */
+    /*
+    <path
   d={`M20 ${(40 - (r + r)) / 2}
         a ${r} ${r} 0 0 1 0 ${r + r}
         a ${r} ${r} 0 0 1 0 -${r + r}`}
@@ -45,6 +53,13 @@ export class CircleMask extends ShapeBase {
   strokeWidth="6"
   strokeDasharray="100"
 />
-		*/
+    */
+  }
+
+
+  public draw(outerRadius: number): void {
+    this.setAttributes(this.element, {
+      r: outerRadius,
+    });
   }
 }

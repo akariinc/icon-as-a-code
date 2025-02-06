@@ -3,7 +3,9 @@ import { Slider } from './Slider';
 export class ColorPicker {
   public onChange?: (name: string, value: string) => void;
 
-  private name: string;
+  public name: string;
+
+  public value: string;
 
   constructor(element: HTMLElement) {
     this.name = element.dataset.name;
@@ -31,12 +33,16 @@ export class ColorPicker {
     const input: HTMLInputElement = element.querySelector('input') as HTMLInputElement;
     input.addEventListener('change', () => {
       // console.log('color ', input.value);
+      this.value = input.value;
       this.applyColorInput(input.value);
     });
     input.addEventListener('input', () => {
       // console.log('color ', input.value);
+      this.value = input.value;
       this.applyColorInput(input.value);
     });
+
+    this.value = input.value;
 
     this.applyColorInput(input.value);
 

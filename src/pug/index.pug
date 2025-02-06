@@ -31,20 +31,20 @@ html(lang='ja')
         div(class=base + "__form-box")
           +c-checkbox({ id: "test0", name: "check0", label: "onlyCircle"})
         div(class=base + "__form-box")
-          +c-slider({ name:"drawProgress", minValue: 0, maxValue: 1 })
+          +c-slider({ name:"drawProgress", minValue: 0, maxValue: 1, defaultValue: 1 })
         div(class=base + "__form-box")
-          +c-slider({ name:"innerRadius", minValue: 1, maxValue: 6 })
+          +c-slider({ name:"innerRadius", minValue: 1, maxValue: 6, defaultValue: 5 })
         div(class=base + "__form-box")
-          +c-slider({ name:"outerRadius", minValue: 7, maxValue: 13 })
+          +c-slider({ name:"outerRadius", minValue: 7, maxValue: 13, defaultValue: 10 })
         div(class=base + "__form-box")
-          +c-slider({ name:"partAngle", minValue: 1, maxValue: 24 })
+          +c-slider({ name:"partAngle", minValue: 1, maxValue: 24, defaultValue: 4 })
 
         hr
           
         div(class=base + "__form-box")
-          +c-slider({ name:"opacityStart", minValue: 0, maxValue: 1 })
+          +c-slider({ name:"opacityStart", minValue: 0, maxValue: 1, defaultValue: 1 })
         div(class=base + "__form-box")
-          +c-slider({ name:"opacityEnd", minValue: 0, maxValue: 1 })
+          +c-slider({ name:"opacityEnd", minValue: 0, maxValue: 1, defaultValue: 1 })
 
         hr
 
@@ -59,10 +59,10 @@ html(lang='ja')
           hr
           
         div(class=base + "__form-box")
-          +c-colorpicker({ id: "picker0", name:"rgbStart", label: "RGB" })
+          +c-colorpicker({ id: "picker0", name:"rgbStart", label: "RGB", value: "#cccccc" })
           
         div(class=base + "__form-box")
-          +c-colorpicker({ id: "picker1", name:"rgbEnd", label: "RGB2" })
+          +c-colorpicker({ id: "picker1", name:"rgbEnd", label: "RGB2", value: "#000000" })
 
         div(class=base + "__form-box")
           div(class=base + "__radio-group js-radio-type")
@@ -74,7 +74,7 @@ html(lang='ja')
 
         hr
         div(class=base + "__form-box")
-          +c-slider({ id: 'zoom', name:"Zoom", minValue: 1, maxValue: 20, noEventHandling: 'true' })
+          +c-slider({ id: 'zoom', name:"Zoom", minValue: 1, maxValue: 20, defaultValue: 10, noEventHandling: 'true' })
 
       div(class=base + "__body")
         svg(class=base + "__svg", id="my-svg", xmlns="http://www.w3.org/2000/svg", width="26", height="26", viewBox="0 0 26 26")

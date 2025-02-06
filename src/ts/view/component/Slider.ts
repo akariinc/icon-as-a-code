@@ -5,7 +5,7 @@ export class Slider {
 
   // private max: number;
 
-  private name: string;
+  public name: string;
 
   // private bg: HTMLElement;
 

@@ -1,8 +1,15 @@
 import { LogoProperty } from '../../../info/LogoProperty';
-import { ShapeBase } from './ShapeBase';
+import { ShapeBase } from '../common/ShapeBase';
 
-export class Tail extends ShapeBase {
-  constructor(props: LogoProperty) {
+export class TailFill extends ShapeBase {
+
+  private stop0: SVGStopElement;
+
+  private stop1: SVGStopElement;
+
+  private rect: SVGRectElement;
+
+  constructor() {
     super();
 
     this.element = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -20,11 +27,7 @@ export class Tail extends ShapeBase {
     grad.setAttribute('y2', '1');
 
     stop0.setAttribute('offset', '0%');
-    stop0.setAttribute('stop-color', props.rgbStart);
-    stop0.setAttribute('stop-opacity', props.opacityStart.toString());
     stop1.setAttribute('offset', '100%');
-    stop1.setAttribute('stop-color', props.rgbEnd);
-    stop1.setAttribute('stop-opacity', props.opacityEnd.toString());
 
     grad.appendChild(stop0);
     grad.appendChild(stop1);
@@ -45,19 +48,37 @@ export class Tail extends ShapeBase {
   </defs>
     */
 
-    const outer: number = props.outerRadius;
-    const inner: number = props.innerRadius;
-
     const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
     this.setAttributes(rect, {
-      width: outer - inner,
-      height: outer,
       fill: 'url(#grad)',
-      opacity: 0.7,
-      transform: 'translate(' + inner + ', 0)',
+      opacity: 1//0.7
     });
+
+    this.stop0 = stop0;
+    this.stop1 = stop1;
+    this.rect = rect;
 
     this.element.appendChild(defs);
     this.element.appendChild(rect);
+  }
+
+
+  public draw(outer: number, inner: number, rgbStart: string, rgbEnd: string, opacityStart: number, opacityEnd: number): void {
+
+    console.log(rgbStart, rgbEnd);
+
+    this.stop0.setAttribute('stop-color', rgbStart);
+    this.stop0.setAttribute('stop-opacity', opacityStart.toString());
+    this.stop1.setAttribute('stop-color', rgbEnd);
+    this.stop1.setAttribute('stop-opacity', opacityEnd.toString());
+
+    // const outer: number = props.outerRadius;
+    // const inner: number = props.innerRadius;
+
+    this.setAttributes(this.rect, {
+      width: outer - inner,
+      height: outer,
+      transform: 'translate(' + inner + ', 0)',
+    });
   }
 }

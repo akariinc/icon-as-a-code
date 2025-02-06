@@ -1,7 +1,6 @@
 import { LogoProperty } from "../../info/LogoProperty";
 import { Container } from "./common/Container";
 import { Line } from "./common/Line";
-import { Tail } from "./common/Tail";
 
 export class Creator {
 
@@ -13,7 +12,7 @@ export class Creator {
 
   private lines: Line[];
 
-  private tail: Tail;
+  // private tail: Tail;
 
   private buttonDownload: HTMLElement;
 
@@ -69,8 +68,8 @@ export class Creator {
     this.removeChildren(this.container.element);
 
     if (!this.props.onlyCircle) {
-      this.tail = new Tail(this.props);
-      this.container.element.appendChild(this.tail.element);
+      // this.tail = new Tail(this.props);
+      // this.container.element.appendChild(this.tail.element);
     }
 
     const rad: number = this.props.partAngle / 180 * Math.PI;
