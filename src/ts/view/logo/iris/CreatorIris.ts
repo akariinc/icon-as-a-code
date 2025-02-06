@@ -82,7 +82,8 @@ export class CreatorIris extends CreatorBase {
     for (var i = 0; i < props.division; i++) {
       const per = (i + 1) / props.division;// * (aroundDis / allDis);
       const opacityPer: number = getEasing(props.opacityCurve, per);
-      const color: string = getColorPercent(props.rgbStart, props.rgbEnd, per);
+      const rgbPer: number = getEasing(props.rgbCurve, per);
+      const color: string = getColorPercent(props.rgbStart, props.rgbEnd, rgbPer);
       const opacity: number = (props.opacityEnd - props.opacityStart) * opacityPer + props.opacityStart;
       const test: IrisLine = new IrisLine(color, opacity, width, height, dis, aroundDis, allDis, props.outerRadius, per);
       this.lineContainer.appendChild(test.element);

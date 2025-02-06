@@ -40,7 +40,8 @@ export class Controller {
       opacityCurve: 'linear',
 
       rgbStart: '',
-      rgbEnd: ''
+      rgbEnd: '',
+      rgbCurve: 'linear'
     };
 
     this.creatorIris = new CreatorIris();

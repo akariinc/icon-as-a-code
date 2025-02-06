@@ -15,4 +15,5 @@ export interface LogoProperty {
 
   rgbStart: string;
   rgbEnd: string;
+  rgbCurve: string;
 };

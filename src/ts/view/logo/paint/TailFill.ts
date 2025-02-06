@@ -65,7 +65,7 @@ export class TailFill extends ShapeBase {
 
   public draw(outer: number, inner: number, rgbStart: string, rgbEnd: string, opacityStart: number, opacityEnd: number): void {
 
-    console.log(rgbStart, rgbEnd);
+    // console.log(rgbStart, rgbEnd);
 
     this.stop0.setAttribute('stop-color', rgbStart);
     this.stop0.setAttribute('stop-opacity', opacityStart.toString());

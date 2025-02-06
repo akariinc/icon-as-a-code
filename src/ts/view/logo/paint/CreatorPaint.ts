@@ -1,5 +1,6 @@
 import { LogoProperty } from '../../../info/LogoProperty';
 import { getColorPercent } from '../../../util/color';
+import { getEasing } from '../../../util/easing';
 import { removeChildren } from '../../../util/element';
 import { CreatorBase } from '../common/CreatorBase';
 import { ArkFill } from './ArkFill';
@@ -55,14 +56,17 @@ export class CreatorPaint extends CreatorBase {
     // const rad: number = (props.partAngle / 180) * Math.PI;
     // const div = 6.28 / rad;
 
-    const div = 100; //props.division;
+    const div = 300; //props.division;
     const rad = 6.28 / div;
 
     for (var i = 0; i < div; i++) {
       const per: number = (i / div) * circlePer;
-      const col: string = getColorPercent(props.rgbStart, props.rgbEnd, per);
+      // const opacityPer: number = getEasing(props.opacityCurve, per);
+      const rgbPer: number = getEasing(props.rgbCurve, per);
+      const col: string = getColorPercent(props.rgbStart, props.rgbEnd, rgbPer);
+      const opacity: number = (props.opacityEnd - props.opacityStart) * getEasing(props.opacityCurve, per) + props.opacityStart;
       // console.log(col);
-      const ark: ArkFill = new ArkFill(props.outerRadius, props.innerRadius, rad * i, col);
+      const ark: ArkFill = new ArkFill(props.outerRadius, props.innerRadius, rad * i, col, opacity);
       //      this.arkContainer.appendChild(ark.element);
       this.arkContainer.insertBefore(ark.element, this.arkContainer.firstChild);
     }
@@ -71,9 +75,9 @@ export class CreatorPaint extends CreatorBase {
       this.tail.draw(
         props.outerRadius,
         props.innerRadius,
-        getColorPercent(props.rgbStart, props.rgbEnd, circlePer),
+        getColorPercent(props.rgbStart, props.rgbEnd, getEasing(props.rgbCurve, circlePer)),
         props.rgbEnd,
-        props.opacityStart,
+        (props.opacityEnd - props.opacityStart) * circlePer + props.opacityStart,
         props.opacityEnd
       );
       this.container.element.appendChild(this.tail.element);
