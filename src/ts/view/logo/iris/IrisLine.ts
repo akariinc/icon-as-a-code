@@ -5,7 +5,7 @@ export class IrisLine extends ShapeBase {
 
   // ここのperはテールの距離を含めて0 - 1の値
   // onlyCircleがtrueの場合は、perが1のものが、そもそも来ない
-  constructor(col: string, width: number, height: number, dis: number, aroundDis: number, allDis: number, tailHeight: number, per: number) {
+  constructor(col: string, opacity: number, width: number, height: number, dis: number, aroundDis: number, allDis: number, tailHeight: number, per: number) {
     super();
 
     this.element = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
@@ -16,7 +16,7 @@ export class IrisLine extends ShapeBase {
       width: width,
       height: height,
       fill: col,
-      opacity: 0.7
+      opacity: opacity
     });
 
     const myDis: number = allDis * per;
@@ -25,6 +25,8 @@ export class IrisLine extends ShapeBase {
 
 
     if (circlePer < 1) {
+
+      // 円周上に配置されるライン
 
       // console.log('myDis', myDis, 'aroundDis', aroundDis, 'allDis', allDis, 'circlePer', circlePer);
 
@@ -38,13 +40,15 @@ export class IrisLine extends ShapeBase {
       });
     } else {
 
+      // 円を1週したので直線上に並ぶライン
+
       // const tailPerOffset = aroundDis / allDis;
 
       const realHeight: number = tailHeight - (height * 0.5);
 
       const per3 = (myDis - aroundDis) / (allDis - aroundDis);
 
-      console.log('per3 = ', per3);
+      // console.log('per3 = ', per3);
 
       // const tailPer: number = 
 

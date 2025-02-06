@@ -1,4 +1,5 @@
 import { LogoProperty } from '../info/LogoProperty';
+import { easeInOutQuad } from '../util/easing';
 import { ColorPicker } from '../view/component/ColorPicker';
 import { Slider } from '../view/component/Slider';
 import { CreatorBase } from '../view/logo/common/CreatorBase';
@@ -19,6 +20,12 @@ export class Controller {
   constructor() {
     this.sideUI = document.querySelector('.js-side') as HTMLElement;
 
+    // for (var i = 0; i < 100; i++) {
+    //   const t = (i + 1) / 100;
+    //   const easing = easeInOutQuad(t);
+    //   console.log(i, t, easing);
+    // }
+
     this.props = {
       onlyCircle: false,
       drawProgress: 0,
@@ -30,6 +37,7 @@ export class Controller {
 
       opacityStart: 0,
       opacityEnd: 0,
+      opacityCurve: 'linear',
 
       rgbStart: '',
       rgbEnd: ''
@@ -89,6 +97,20 @@ export class Controller {
         this.selectCreator.update(this.props);
       };
       this.props[picker.name] = picker.value;
+    }
+
+    // ComboBox
+
+    const comboboxes: NodeListOf<HTMLSelectElement> = document.querySelectorAll('.js-ComboBox');
+
+    for (var i = 0; i < comboboxes.length; i++) {
+      const select: HTMLSelectElement = comboboxes[i];
+      select.addEventListener('change', (e: Event) => {
+        const name = select.dataset.name;
+        console.log(name, (e.target as HTMLSelectElement).value);
+        this.props[name] = (e.target as HTMLSelectElement).value;
+        this.selectCreator.update(this.props);
+      });
     }
 
     const typeRadios: NodeListOf<HTMLInputElement> = document.querySelectorAll('.js-radio-type input');

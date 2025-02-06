@@ -1,5 +1,6 @@
 import { LogoProperty } from '../../../info/LogoProperty';
 import { getColorPercent } from '../../../util/color';
+import { getEasing } from '../../../util/easing';
 import { removeChildren } from '../../../util/element';
 import { CreatorBase } from '../common/CreatorBase';
 import { IrisLine } from './IrisLine';
@@ -76,10 +77,14 @@ export class CreatorIris extends CreatorBase {
     // const offsetX = -width / 2;
     // const offsetY = -height / 2;
 
+    console.log('curve', props.opacityCurve);
+
     for (var i = 0; i < props.division; i++) {
       const per = (i + 1) / props.division;// * (aroundDis / allDis);
+      const opacityPer: number = getEasing(props.opacityCurve, per);
       const color: string = getColorPercent(props.rgbStart, props.rgbEnd, per);
-      const test: IrisLine = new IrisLine(color, width, height, dis, aroundDis, allDis, props.outerRadius, per);
+      const opacity: number = (props.opacityEnd - props.opacityStart) * opacityPer + props.opacityStart;
+      const test: IrisLine = new IrisLine(color, opacity, width, height, dis, aroundDis, allDis, props.outerRadius, per);
       this.lineContainer.appendChild(test.element);
     }
 

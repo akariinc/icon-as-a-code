@@ -1,0 +1,10 @@
+
+//- チェックボックス
+
+mixin c-combobox(args = { id: "", name: "", list: [] })
+  - var base = "c-combobox";
+  div(class=base) 
+    p #{args.name}
+    select(class="js-ComboBox", id=args.id, data-name=args.name)
+      - for (var i = 0; i < args.list.length; i++)
+        option(value=args.list[i]) #{args.list[i]}

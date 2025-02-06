@@ -2,6 +2,7 @@ include ./_include/component/slider
 include ./_include/component/checkbox
 include ./_include/component/radiobutton
 include ./_include/component/colorpicker
+include ./_include/component/combobox
 include ./_include/component/button
 
 block params
@@ -20,6 +21,31 @@ html(lang='ja')
     meta(name="descripttion", content=metas.description)
     meta(name="keywords", content=metas.keywords)
     script(type='text/javascript', src="main.js")
+  
+  - curveList = [
+      "linear",
+      "easeInSine",
+      "easeOutSine",
+      "easeInOutSine",
+      "easeInQuad",
+      "easeOutQuad",
+      "easeInOutQuad",
+      "easeInCubic",
+      "easeOutCubic",
+      "easeInOutCubic",
+      "easeInQuart",
+      "easeOutQuart",
+      "easeInOutQuart",
+      "easeInQuint",
+      "easeOutQuint",
+      "easeInOutQuint",
+      "easeInExpo",
+      "easeOutExpo",
+      "easeInOutExpo",
+      "easeInCirc",
+      "easeOutCirc",
+      "easeInOutCirc"
+    ];
 
   - var base = "l-main";
 
@@ -45,6 +71,9 @@ html(lang='ja')
           +c-slider({ name:"opacityStart", minValue: 0, maxValue: 1, value: 1 })
         div(class=base + "__form-box")
           +c-slider({ name:"opacityEnd", minValue: 0, maxValue: 1, value: 1 })
+          
+        div(class=base + "__form-box")
+          +c-combobox({ name:"opacityCurve", list: curveList })
 
         hr
 

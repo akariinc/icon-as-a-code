@@ -11,6 +11,7 @@ export interface LogoProperty {
 
   opacityStart: number;
   opacityEnd: number;
+  opacityCurve: string;
 
   rgbStart: string;
   rgbEnd: string;
