@@ -25,8 +25,8 @@ export class Controller {
       drawProgress: 0,
       innerRadius: 0,
       outerRadius: 0,
-      // shapeType: 'iris',
-      partAngle: 1,
+      lineTickness: 0.1,
+      division: 1,
       mask: false,
 
       opacityStart: 0,
@@ -43,6 +43,8 @@ export class Controller {
 
     this.selectCreator.update(this.props);
     this.creatorPaint.update(this.props);
+
+    this.changeType('0');
     // console.log(svg);
   }
 
@@ -95,16 +97,17 @@ export class Controller {
     for (var i = 0; i < typeRadios.length; i++) {
       const radio: HTMLInputElement = typeRadios[i];
       radio.addEventListener('change', () => {
+        this.changeType(radio.value);
         // console.log(radio.value === '0');
-        if (radio.value === '0') {
-          this.sideUI.classList.add('--iris');
-          this.sideUI.classList.remove('--paint');
-          this.selectCreator = this.creatorIris;
-        } else {
-          this.sideUI.classList.remove('--iris');
-          this.sideUI.classList.add('--paint');
-          this.selectCreator = this.creatorPaint;
-        }
+        // if (radio.value === '0') {
+        //   this.sideUI.classList.add('--iris');
+        //   this.sideUI.classList.remove('--paint');
+        //   this.selectCreator = this.creatorIris;
+        // } else {
+        //   this.sideUI.classList.remove('--iris');
+        //   this.sideUI.classList.add('--paint');
+        //   this.selectCreator = this.creatorPaint;
+        // }
 
         this.selectCreator.update(this.props);
       });
@@ -116,5 +119,22 @@ export class Controller {
       this.selectCreator.svg.style.transform = 'scale(' + value + ')';
     };
     this.selectCreator.svg.style.transform = 'scale(' + zoom.value + ')';
+  }
+
+
+  private changeType(type: string): void {
+    if (type === '0') {
+      this.sideUI.classList.add('--iris');
+      this.sideUI.classList.remove('--paint');
+      this.creatorIris.show();
+      this.creatorPaint.hide();
+      this.selectCreator = this.creatorIris;
+    } else if (type === '1') {
+      this.sideUI.classList.remove('--iris');
+      this.sideUI.classList.add('--paint');
+      this.creatorIris.hide();
+      this.creatorPaint.show();
+      this.selectCreator = this.creatorPaint;
+    }
   }
 }

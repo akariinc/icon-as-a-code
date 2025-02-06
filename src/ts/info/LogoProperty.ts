@@ -4,7 +4,9 @@ export interface LogoProperty {
   innerRadius: number;
   outerRadius: number;
   // shapeType: 'iris' | 'paint';
-  partAngle: number;
+  lineTickness: number;
+  // partAngle: number;
+  division: number;
   mask: boolean;
 
   opacityStart: number;

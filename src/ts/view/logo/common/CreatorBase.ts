@@ -13,9 +13,9 @@ export class CreatorBase {
 
   protected buttonDownload: HTMLElement;
 
-  constructor() {
+  constructor(id: string) {
     this.parent = document.getElementById('my-svg') as HTMLElement;
-    this.container = new Container();
+    this.container = new Container(id);
     this.svg = this.parent;
 
     // this.props = {
@@ -34,7 +34,7 @@ export class CreatorBase {
     //   rgbEnd: ''
     // };
 
-    this.parent.appendChild(this.container.element);
+    // this.parent.appendChild(this.container.element);
 
     this.buttonDownload = document.getElementById('button-execute');
     this.buttonDownload.setAttribute("download", 'logo.svg');
@@ -44,16 +44,15 @@ export class CreatorBase {
     //
   }
 
-  /*
-   * 子要素をすべて削除
-   */
-  protected removeChildren(element: SVGElement): void {
 
-    while (element.firstChild) {
-      element.removeChild(element.firstChild);
-    }
-  };
+  public show(): void {
+    this.parent.appendChild(this.container.element);
+  }
 
+
+  public hide(): void {
+    this.parent.removeChild(this.container.element);
+  }
 
   protected updateDownloadHref() {
     const svg = this.svg.outerHTML;

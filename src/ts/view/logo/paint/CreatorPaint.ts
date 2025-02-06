@@ -1,7 +1,7 @@
 import { LogoProperty } from '../../../info/LogoProperty';
 import { getColorPercent } from '../../../util/color';
+import { removeChildren } from '../../../util/element';
 import { CreatorBase } from '../common/CreatorBase';
-import { Line } from '../common/Line';
 import { ArkFill } from './ArkFill';
 import { CircleMask } from './CircleMask';
 import { TailFill } from './TailFill';
@@ -15,7 +15,7 @@ export class CreatorPaint extends CreatorBase {
   private tail: TailFill;
 
   constructor() {
-    super();
+    super('paint');
 
     const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
     const clipPath = document.createElementNS('http://www.w3.org/2000/svg', 'clipPath');
@@ -37,7 +37,7 @@ export class CreatorPaint extends CreatorBase {
   public update(props: LogoProperty): void {
     console.log('update paint');
 
-    this.removeChildren(this.arkContainer);
+    removeChildren(this.arkContainer);
 
     this.circleMask.draw(props.outerRadius);
 
@@ -52,8 +52,11 @@ export class CreatorPaint extends CreatorBase {
     // arkContainer.setAttribute('clip-path', 'url(#clip)');
     // this.container.element.append(arkContainer);
 
-    const rad: number = (props.partAngle / 180) * Math.PI;
-    const div = 6.28 / rad;
+    // const rad: number = (props.partAngle / 180) * Math.PI;
+    // const div = 6.28 / rad;
+
+    const div = 100; //props.division;
+    const rad = 6.28 / div;
 
     for (var i = 0; i < div; i++) {
       const per: number = (i / div) * circlePer;
