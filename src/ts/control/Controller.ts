@@ -34,6 +34,7 @@ export class Controller {
       lineTickness: 0.1,
       division: 1,
       mask: false,
+      lineCap: 'rectangular',
 
       opacityStart: 0,
       opacityEnd: 0,
@@ -118,8 +119,16 @@ export class Controller {
 
     for (var i = 0; i < typeRadios.length; i++) {
       const radio: HTMLInputElement = typeRadios[i];
-      radio.addEventListener('change', () => {
-        this.changeType(radio.value);
+      radio.addEventListener('change', (e: Event) => {
+
+        console.log(radio.name, radio.value);
+
+        if (radio.name === 'shapeType') {
+          this.changeType(radio.value);
+        } else {
+          this.props[radio.name] = (e.target as HTMLInputElement).value;
+          console.log(radio.name + ' = ' + this.props[radio.name]);
+        }
         // console.log(radio.value === '0');
         // if (radio.value === '0') {
         //   this.sideUI.classList.add('--iris');

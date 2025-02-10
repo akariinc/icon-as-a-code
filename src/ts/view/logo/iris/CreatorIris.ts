@@ -79,7 +79,9 @@ export class CreatorIris extends CreatorBase {
 
     console.log('curve', props.opacityCurve);
 
-    for (var i = 0; i < props.division; i++) {
+    const progress: number = props.division * props.drawProgress;
+
+    for (var i = 0; i < progress; i++) {
       const per = (i + 1) / props.division;// * (aroundDis / allDis);
       const opacityPer: number = getEasing(props.opacityCurve, per);
       const rgbPer: number = getEasing(props.rgbCurve, per);

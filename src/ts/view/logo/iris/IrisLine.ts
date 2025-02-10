@@ -46,7 +46,9 @@ export class IrisLine extends ShapeBase {
 
       const realHeight: number = tailHeight - (height * 0.5);
 
-      const per3 = (myDis - aroundDis) / (allDis - aroundDis);
+      const per3 = ((myDis - aroundDis) / (allDis - aroundDis)) || 0; // NaN対策（0/0の場合）
+
+      // console.log('per3, realHeight', per3, realHeight);
 
       // console.log('per3 = ', per3);
 

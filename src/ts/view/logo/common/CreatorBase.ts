@@ -1,4 +1,5 @@
 import { LogoProperty } from "../../../info/LogoProperty";
+import { removeChild } from "../../../util/element";
 import { Container } from "./Container";
 
 export class CreatorBase {
@@ -51,7 +52,8 @@ export class CreatorBase {
 
 
   public hide(): void {
-    this.parent.removeChild(this.container.element);
+    removeChild(this.parent, this.container.element);
+    // this.parent.removeChild(this.container.element);
   }
 
   protected updateDownloadHref() {

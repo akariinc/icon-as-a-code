@@ -1,10 +1,11 @@
 import { LogoProperty } from '../../../info/LogoProperty';
 import { getColorPercent } from '../../../util/color';
 import { getEasing } from '../../../util/easing';
-import { removeChildren } from '../../../util/element';
+import { removeChild, removeChildren } from '../../../util/element';
 import { CreatorBase } from '../common/CreatorBase';
 import { ArkFill } from './ArkFill';
 import { CircleMask } from './CircleMask';
+import { TailCircular } from './TailCircular';
 import { TailFill } from './TailFill';
 
 export class CreatorPaint extends CreatorBase {
@@ -14,6 +15,8 @@ export class CreatorPaint extends CreatorBase {
   private circleMask: CircleMask;
 
   private tail: TailFill;
+
+  private tailCircular: TailCircular;
 
   constructor() {
     super('paint');
@@ -33,11 +36,15 @@ export class CreatorPaint extends CreatorBase {
 
     this.tail = new TailFill();
     this.container.element.appendChild(this.tail.element);
+
+    this.tailCircular = new TailCircular();
+    this.container.element.appendChild(this.tailCircular.element);
   }
 
   public update(props: LogoProperty): void {
     console.log('update paint');
 
+    // 一旦すべてリムーブ
     removeChildren(this.arkContainer);
 
     this.circleMask.draw(props.outerRadius);
@@ -59,7 +66,9 @@ export class CreatorPaint extends CreatorBase {
     const div = 300; //props.division;
     const rad = 6.28 / div;
 
-    for (var i = 0; i < div; i++) {
+    const progress: number = div * props.drawProgress;
+
+    for (var i = 0; i < progress; i++) {
       const per: number = (i / div) * circlePer;
       // const opacityPer: number = getEasing(props.opacityCurve, per);
       const rgbPer: number = getEasing(props.rgbCurve, per);
@@ -81,8 +90,19 @@ export class CreatorPaint extends CreatorBase {
         props.opacityEnd
       );
       this.container.element.appendChild(this.tail.element);
+
+      if (props.lineCap === 'circular') {
+        this.tailCircular.draw(props);
+        this.container.element.appendChild(this.tailCircular.element);
+      } else {
+        removeChild(this.container.element, this.tailCircular.element);
+        // this.container.element.removeChild(this.tailCircular.element);
+      }
     } else {
-      this.container.element.removeChild(this.tail.element);
+      removeChild(this.container.element, this.tail.element);
+      removeChild(this.container.element, this.tailCircular.element);
+      // this.container.element.removeChild(this.tail.element);
+      // this.container.element.removeChild(this.tailCircular.element);
     }
 
     this.updateDownloadHref();

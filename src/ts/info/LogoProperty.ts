@@ -8,6 +8,7 @@ export interface LogoProperty {
   // partAngle: number;
   division: number;
   mask: boolean;
+  lineCap: 'rectangular' | 'circular';
 
   opacityStart: number;
   opacityEnd: number;

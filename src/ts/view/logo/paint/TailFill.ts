@@ -13,6 +13,7 @@ export class TailFill extends ShapeBase {
     super();
 
     this.element = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    this.element.setAttribute('class', 'tail-fill');
 
     const defs: SVGDefsElement = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
     const grad: SVGLinearGradientElement = document.createElementNS('http://www.w3.org/2000/svg', 'linearGradient');

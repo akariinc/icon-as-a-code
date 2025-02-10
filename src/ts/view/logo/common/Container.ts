@@ -6,7 +6,8 @@ export class Container extends ShapeBase {
 
     this.element = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     this.setAttributes(this.element, {
-      id: id,
+      // id: id,
+      class: id,
       transform: 'translate(13, 13)',
     });
   }

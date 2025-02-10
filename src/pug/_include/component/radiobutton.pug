@@ -5,7 +5,7 @@ mixin c-radiobutton(args = { id: "", name: "", label: "", value: "", selected: f
   - var base = "c-radio";
   div(class=base) 
     - if (args.selected)
-      input(type="radio", id=args.id, name=args.name, value=args.value checked)
+      input(type="radio", id=args.id, name=args.name, value=args.value, data-name=args.name checked)
     - else
-      input(type="radio", id=args.id, name=args.name, value=args.value)
+      input(type="radio", id=args.id, name=args.name, value=args.value, data-name=args.name)
     label(for=args.id) !{args.label}
