@@ -42,7 +42,7 @@ export class CreatorPaint extends CreatorBase {
   }
 
   public update(props: LogoProperty): void {
-    console.log('update paint');
+    // console.log('update paint');
 
     // 一旦すべてリムーブ
     removeChildren(this.arkContainer);
@@ -54,7 +54,8 @@ export class CreatorPaint extends CreatorBase {
 
     const circlePer = aroundDis / allDis;
 
-    console.log('allDis', allDis, 'aroundDis', aroundDis, 'circlePer', circlePer);
+    // console.log('allDis', allDis, 'aroundDis', aroundDis, 'circlePer', circlePer);
+
 
     // const arkContainer = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     // arkContainer.setAttribute('clip-path', 'url(#clip)');
@@ -66,7 +67,17 @@ export class CreatorPaint extends CreatorBase {
     const div = 300; //props.division;
     const rad = 6.28 / div;
 
-    const progress: number = div * props.drawProgress;
+    let progress = 0;
+
+    if (props.onlyCircle) {
+      // サークルのみ
+      progress = div * props.drawProgress;
+    } else {
+      // サークル＋尻尾
+      progress = Math.min(div, div * props.drawProgress / circlePer);
+    }
+
+    console.log('circlePer', circlePer, 'drawProgress', props.drawProgress, 'progress', progress);
 
     for (var i = 0; i < progress; i++) {
       const per: number = (i / div) * circlePer;
@@ -81,15 +92,23 @@ export class CreatorPaint extends CreatorBase {
     }
 
     if (!props.onlyCircle) {
-      this.tail.draw(
-        props.outerRadius,
-        props.innerRadius,
-        getColorPercent(props.rgbStart, props.rgbEnd, getEasing(props.rgbCurve, circlePer)),
-        props.rgbEnd,
-        (props.opacityEnd - props.opacityStart) * circlePer + props.opacityStart,
-        props.opacityEnd
-      );
-      this.container.element.appendChild(this.tail.element);
+
+      // 尻尾ありかつ、drawProgressが尻尾までいっているかどうか
+      if (props.drawProgress > circlePer) {
+        this.tail.draw(
+          props.outerRadius,
+          props.innerRadius,
+          getColorPercent(props.rgbStart, props.rgbEnd, getEasing(props.rgbCurve, circlePer)),
+          props.rgbEnd,
+          (props.opacityEnd - props.opacityStart) * circlePer + props.opacityStart,
+          props.opacityEnd,
+          (props.drawProgress - circlePer) / (1 - circlePer)
+        );
+        this.container.element.appendChild(this.tail.element);
+
+      } else {
+        removeChild(this.container.element, this.tail.element);
+      }
 
       if (props.lineCap === 'circular') {
         this.tailCircular.draw(props);

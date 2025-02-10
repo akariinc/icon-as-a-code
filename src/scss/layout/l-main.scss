@@ -55,4 +55,25 @@
     transform-origin: 0.5 0.5;
     transform: scale(10);
   }
+
+  &__hr-wide {
+    border-width: 2px;
+    border-color: #333;
+  }
+
+  &__foot {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 300px;
+    left: calc(50% - 150px);
+  }
+
+  &__right {
+    position: absolute;
+    top: 80px;
+    right: 10px;
+    width: 200px;
+    z-index: 3;
+  }
 }

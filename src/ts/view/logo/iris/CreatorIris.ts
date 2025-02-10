@@ -24,7 +24,7 @@ export class CreatorIris extends CreatorBase {
   }
 
   public update(props: LogoProperty): void {
-    console.log('update iris', props.lineTickness);
+    // console.log('update iris', props.lineTickness);
 
     removeChildren(this.container.element);
     removeChildren(this.lineContainer);
@@ -77,7 +77,7 @@ export class CreatorIris extends CreatorBase {
     // const offsetX = -width / 2;
     // const offsetY = -height / 2;
 
-    console.log('curve', props.opacityCurve);
+    // console.log('curve', props.opacityCurve);
 
     const progress: number = props.division * props.drawProgress;
 

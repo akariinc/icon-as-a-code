@@ -31,6 +31,15 @@ html(lang='ja')
       div(class=base + "__header")
         h1 Logo Creator
       div(class=base + "__side js-side --iris")
+
+        div(class=base + "__form-box")
+          p shapeType
+          div(class=base + "__radio-group js-radio-type")
+            +c-radiobutton({ id: "shapeType0", name: "shapeType", label: "iris", value: 0})
+            +c-radiobutton({ id: "shapeType1", name: "shapeType", label: "paint", value: 1, selected: true})
+
+        hr(class=base+"__hr-wide")
+
         div(class=base + "__form-box")
           +c-checkbox({ id: "test0", name: "check0", label: "onlyCircle"})
         div(class=base + "__form-box")
@@ -41,12 +50,17 @@ html(lang='ja')
           +c-slider({ name:"innerRadius", minValue: 1, maxValue: 6, value: 5 })
         div(class=base + "__form-box")
           +c-slider({ name:"outerRadius", minValue: 7, maxValue: 13, value: 10 })
-        
-        div(class="type-iris")
-          div(class=base + "__form-box")
-            +c-slider({ name:"division", minValue: 1, maxValue: 100, value: 30, step: 1 })
+          
+        div(class=base + "__form-box")
+          +c-colorpicker({ id: "picker0", name:"rgbStart", label: "RGB", value: "#cccccc" })
+          
+        div(class=base + "__form-box")
+          +c-colorpicker({ id: "picker1", name:"rgbEnd", label: "RGB2", value: "#000000" })
+          
+        div(class=base + "__form-box")
+          +c-combobox({ name:"rgbCurve", list: curveList })
 
-          hr
+        hr
           
         div(class=base + "__form-box")
           +c-slider({ name:"opacityStart", minValue: 0, maxValue: 1, value: 1 })
@@ -60,6 +74,10 @@ html(lang='ja')
 
         div(class="type-iris")
           div(class=base + "__form-box")
+            +c-slider({ name:"division", minValue: 1, maxValue: 100, value: 30, step: 1 })
+
+          hr
+          div(class=base + "__form-box")
             +c-slider({ name:"lineTickness", minValue: 0.01, maxValue: 1, value: 0.3 })
           hr
 
@@ -69,28 +87,19 @@ html(lang='ja')
             +c-radiobutton({ id: "radio10", name: "lineCap", label: "rectangular", value: 'rectangular', selected: true})
             +c-radiobutton({ id: "radio11", name: "lineCap", label: "circular", value: 'circular'})
           hr
-          
-        div(class=base + "__form-box")
-          +c-colorpicker({ id: "picker0", name:"rgbStart", label: "RGB", value: "#cccccc" })
-          
-        div(class=base + "__form-box")
-          +c-colorpicker({ id: "picker1", name:"rgbEnd", label: "RGB2", value: "#000000" })
-          
-        div(class=base + "__form-box")
-          +c-combobox({ name:"rgbCurve", list: curveList })
-
-        hr
-
-        div(class=base + "__form-box")
-          p shapeType
-          div(class=base + "__radio-group js-radio-type")
-            +c-radiobutton({ id: "radio0", name: "shapeType", label: "iris", value: 0, selected: true})
-            +c-radiobutton({ id: "radio2", name: "shapeType", label: "paint", value: 1})
 
         div(class=base + "__form-box")
           +c-button({ id:"button-execute", label: "ダウンロード"})
 
-        hr
+      div(class=base + "__right")
+        div(class=base + "__form-box")
+          +c-slider({ name:"animDuration", minValue: 0.1, maxValue: 3, value: 1 })
+        div(class=base + "__form-box")
+          +c-combobox({ name:"animCurve", list: curveList })
+        div(class=base + "__form-box")
+          +c-button({ id:"button-play", label: "アニメ再生"})
+
+      div(class=base + "__foot")
         div(class=base + "__form-box")
           +c-slider({ id: 'zoom', name:"Zoom", minValue: 1, maxValue: 30, value: 30, noEventHandling: 'true' })
 

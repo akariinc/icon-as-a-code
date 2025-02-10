@@ -42,7 +42,10 @@ export class Controller {
 
       rgbStart: '',
       rgbEnd: '',
-      rgbCurve: 'linear'
+      rgbCurve: 'linear',
+
+      animCurve: 'linear',
+      animDuration: 1
     };
 
     this.creatorIris = new CreatorIris();
@@ -53,8 +56,14 @@ export class Controller {
     this.selectCreator.update(this.props);
     this.creatorPaint.update(this.props);
 
-    this.changeType('0');
+    this.changeType(((document.getElementById('shapeType0') as HTMLInputElement).checked) ? '0' : '1');
     // console.log(svg);
+
+    const buttonAnimPlay: HTMLElement = document.getElementById('button-play') as HTMLElement;
+    buttonAnimPlay.addEventListener('click', () => {
+      console.log('click');
+      this.selectCreator.anim(Object.assign({}, this.props));
+    });
   }
 
   private setUIEvent() {
