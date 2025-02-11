@@ -1,10 +1,10 @@
-import { LogoProperty } from "../../../info/LogoProperty";
-import { getEasing } from "../../../util/easing";
-import { removeChild } from "../../../util/element";
-import { Container } from "./Container";
+import { LogoProperty } from '../../../info/LogoProperty';
+import { getEasing } from '../../../util/easing';
+import { removeChild } from '../../../util/element';
+import { Container } from './Container';
+import { TailMask } from './TailMask';
 
 export class CreatorBase {
-
   // public props: LogoProperty;
 
   public svg: HTMLElement;
@@ -15,11 +15,14 @@ export class CreatorBase {
 
   protected buttonDownload: HTMLElement;
 
+  protected mask: TailMask;
+
   constructor(id: string) {
     this.parent = document.getElementById('my-svg') as HTMLElement;
     this.container = new Container(id);
     this.svg = this.parent;
 
+    this.mask = new TailMask();
     // this.props = {
     //   onlyCircle: false,
     //   drawProgress: 0,
@@ -39,7 +42,7 @@ export class CreatorBase {
     // this.parent.appendChild(this.container.element);
 
     this.buttonDownload = document.getElementById('button-execute');
-    this.buttonDownload.setAttribute("download", 'logo.svg');
+    this.buttonDownload.setAttribute('download', 'logo.svg');
 
     this.currentKey = 0;
     this.enterFrameFunc = null;
@@ -51,17 +54,14 @@ export class CreatorBase {
     //
   }
 
-
   public show(): void {
     this.parent.appendChild(this.container.element);
   }
-
 
   public hide(): void {
     removeChild(this.parent, this.container.element);
     // this.parent.removeChild(this.container.element);
   }
-
 
   public anim(props: LogoProperty): void {
     const endDuration: number = props.animDuration * 1000;
@@ -75,7 +75,6 @@ export class CreatorBase {
     this.update(props);
 
     this.onEnterFrame = (deltaTime: number) => {
-
       currDuration += deltaTime;
 
       if (currDuration >= endDuration) {
@@ -98,11 +97,10 @@ export class CreatorBase {
     };
   }
 
-
   protected updateDownloadHref() {
     const svg = this.svg.outerHTML;
-    var url = "data:text/plain;charset=utf-8," + encodeURIComponent(svg);
-    this.buttonDownload.setAttribute("href", url);
+    var url = 'data:text/plain;charset=utf-8,' + encodeURIComponent(svg);
+    this.buttonDownload.setAttribute('href', url);
   }
 
   private enterFrameFunc: Function | null;

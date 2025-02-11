@@ -2,7 +2,6 @@ import { LogoProperty } from '../../../info/LogoProperty';
 import { ShapeBase } from '../common/ShapeBase';
 
 export class TailFill extends ShapeBase {
-
   private stop0: SVGStopElement;
 
   private stop1: SVGStopElement;
@@ -52,7 +51,7 @@ export class TailFill extends ShapeBase {
     const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
     this.setAttributes(rect, {
       fill: 'url(#grad)',
-      opacity: 1//0.7
+      opacity: 1, //0.7
     });
 
     this.stop0 = stop0;
@@ -63,10 +62,8 @@ export class TailFill extends ShapeBase {
     this.element.appendChild(rect);
   }
 
-
   public draw(outer: number, inner: number, rgbStart: string, rgbEnd: string, opacityStart: number, opacityEnd: number, progress: number): void {
-
-    // console.log(rgbStart, rgbEnd);
+    console.log(opacityStart, opacityEnd);
 
     console.log('progress', progress);
 

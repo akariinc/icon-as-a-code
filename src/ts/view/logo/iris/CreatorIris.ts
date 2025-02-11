@@ -3,8 +3,8 @@ import { getColorPercent } from '../../../util/color';
 import { getEasing } from '../../../util/easing';
 import { removeChildren } from '../../../util/element';
 import { CreatorBase } from '../common/CreatorBase';
+import { TailMask } from '../common/TailMask';
 import { IrisLine } from './IrisLine';
-import { IrisMask } from './IrisMask';
 import { LineSimple } from './LineSimple';
 import { TailLines } from './TailLines';
 
@@ -15,8 +15,6 @@ export class CreatorIris extends CreatorBase {
 
   private tail: TailLines;
 
-  private mask: IrisMask;
-
   constructor() {
     super('iris');
 
@@ -24,7 +22,6 @@ export class CreatorIris extends CreatorBase {
     this.container.element.appendChild(this.lineContainer);
 
     this.tail = new TailLines();
-    this.mask = new IrisMask();
   }
 
   public update(props: LogoProperty): void {
@@ -33,7 +30,6 @@ export class CreatorIris extends CreatorBase {
     removeChildren(this.container.element);
     removeChildren(this.lineContainer);
     this.container.element.appendChild(this.lineContainer);
-    this.container.element.appendChild(this.mask.element);
 
     if (!props.onlyCircle) {
       // this.tail = new Tail(props);
@@ -77,17 +73,19 @@ export class CreatorIris extends CreatorBase {
     const aroundDis: number = dis * 2 * Math.PI;
 
     // 尻尾も含めたトータルの距離
-    const allDis: number = (props.onlyCircle) ? aroundDis : aroundDis + props.outerRadius;
+    const allDis: number = props.onlyCircle ? aroundDis : aroundDis + props.outerRadius;
 
     // const offsetX = -width / 2;
     // const offsetY = -height / 2;
 
     // console.log('curve', props.opacityCurve);
 
+    const circlePer = aroundDis / allDis;
+
     const progress: number = props.division * props.drawProgress;
 
     for (var i = 0; i < progress; i++) {
-      const per = (i + 1) / props.division;// * (aroundDis / allDis);
+      const per = (i + 1) / props.division; // * (aroundDis / allDis);
       const opacityPer: number = getEasing(props.opacityCurve, per);
       const rgbPer: number = getEasing(props.rgbCurve, per);
       const color: string = getColorPercent(props.rgbStart, props.rgbEnd, rgbPer);
@@ -96,10 +94,11 @@ export class CreatorIris extends CreatorBase {
       this.lineContainer.appendChild(test.element);
     }
 
+    this.container.element.appendChild(this.mask.element);
+    this.mask.draw(props, (props.drawProgress - circlePer) / (1 - circlePer));
+
     if (props.mask) {
-
     } else {
-
     }
 
     // this.lineContainer.setAttribute('transform', 'translate(' + offsetX + ', ' + offsetY + ')');

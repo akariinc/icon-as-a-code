@@ -9,10 +9,9 @@ import { TailCircular } from './TailCircular';
 import { TailFill } from './TailFill';
 
 export class CreatorPaint extends CreatorBase {
-
   private arkContainer: SVGGElement;
 
-  private circleMask: CircleMask;
+  // private circleMask: CircleMask;
 
   private tail: TailFill;
 
@@ -27,8 +26,10 @@ export class CreatorPaint extends CreatorBase {
     this.container.element.append(defs);
     defs.append(clipPath);
 
-    this.circleMask = new CircleMask();
-    clipPath.appendChild(this.circleMask.element);
+    // this.circleMask = new CircleMask();
+    // clipPath.appendChild(this.circleMask.element);
+
+    clipPath.appendChild(this.mask.element);
 
     this.arkContainer = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     this.arkContainer.setAttribute('clip-path', 'url(#clip)');
@@ -47,15 +48,14 @@ export class CreatorPaint extends CreatorBase {
     // 一旦すべてリムーブ
     removeChildren(this.arkContainer);
 
-    this.circleMask.draw(props.outerRadius);
+    // this.circleMask.draw(props.outerRadius);
 
-    const aroundDis: number = (props.innerRadius + (props.outerRadius * 0.5)) * 2 * Math.PI;
+    const aroundDis: number = (props.innerRadius + props.outerRadius * 0.5) * 2 * Math.PI;
     const allDis: number = aroundDis + props.outerRadius;
 
     const circlePer = aroundDis / allDis;
 
     // console.log('allDis', allDis, 'aroundDis', aroundDis, 'circlePer', circlePer);
-
 
     // const arkContainer = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     // arkContainer.setAttribute('clip-path', 'url(#clip)');
@@ -74,7 +74,7 @@ export class CreatorPaint extends CreatorBase {
       progress = div * props.drawProgress;
     } else {
       // サークル＋尻尾
-      progress = Math.min(div, div * props.drawProgress / circlePer);
+      progress = Math.min(div, (div * props.drawProgress) / circlePer);
     }
 
     console.log('circlePer', circlePer, 'drawProgress', props.drawProgress, 'progress', progress);
@@ -91,21 +91,14 @@ export class CreatorPaint extends CreatorBase {
       this.arkContainer.insertBefore(ark.element, this.arkContainer.firstChild);
     }
 
-    if (!props.onlyCircle) {
+    // this.container.element.appendChild(this.mask.element);
+    this.mask.draw(props, (props.drawProgress - circlePer) / (1 - circlePer));
 
+    if (!props.onlyCircle) {
       // 尻尾ありかつ、drawProgressが尻尾までいっているかどうか
       if (props.drawProgress > circlePer) {
-        this.tail.draw(
-          props.outerRadius,
-          props.innerRadius,
-          getColorPercent(props.rgbStart, props.rgbEnd, getEasing(props.rgbCurve, circlePer)),
-          props.rgbEnd,
-          (props.opacityEnd - props.opacityStart) * circlePer + props.opacityStart,
-          props.opacityEnd,
-          (props.drawProgress - circlePer) / (1 - circlePer)
-        );
+        this.tail.draw(props.outerRadius, props.innerRadius, getColorPercent(props.rgbStart, props.rgbEnd, getEasing(props.rgbCurve, circlePer)), props.rgbEnd, (props.opacityEnd - props.opacityStart) * circlePer + props.opacityStart, props.opacityEnd, (props.drawProgress - circlePer) / (1 - circlePer));
         this.container.element.appendChild(this.tail.element);
-
       } else {
         removeChild(this.container.element, this.tail.element);
       }
