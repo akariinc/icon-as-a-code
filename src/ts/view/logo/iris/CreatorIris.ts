@@ -4,6 +4,7 @@ import { getEasing } from '../../../util/easing';
 import { removeChildren } from '../../../util/element';
 import { CreatorBase } from '../common/CreatorBase';
 import { IrisLine } from './IrisLine';
+import { IrisMask } from './IrisMask';
 import { LineSimple } from './LineSimple';
 import { TailLines } from './TailLines';
 
@@ -14,6 +15,8 @@ export class CreatorIris extends CreatorBase {
 
   private tail: TailLines;
 
+  private mask: IrisMask;
+
   constructor() {
     super('iris');
 
@@ -21,6 +24,7 @@ export class CreatorIris extends CreatorBase {
     this.container.element.appendChild(this.lineContainer);
 
     this.tail = new TailLines();
+    this.mask = new IrisMask();
   }
 
   public update(props: LogoProperty): void {
@@ -29,6 +33,7 @@ export class CreatorIris extends CreatorBase {
     removeChildren(this.container.element);
     removeChildren(this.lineContainer);
     this.container.element.appendChild(this.lineContainer);
+    this.container.element.appendChild(this.mask.element);
 
     if (!props.onlyCircle) {
       // this.tail = new Tail(props);
@@ -89,6 +94,12 @@ export class CreatorIris extends CreatorBase {
       const opacity: number = (props.opacityEnd - props.opacityStart) * opacityPer + props.opacityStart;
       const test: IrisLine = new IrisLine(color, opacity, width, height, dis, aroundDis, allDis, props.outerRadius, per);
       this.lineContainer.appendChild(test.element);
+    }
+
+    if (props.mask) {
+
+    } else {
+
     }
 
     // this.lineContainer.setAttribute('transform', 'translate(' + offsetX + ', ' + offsetY + ')');
