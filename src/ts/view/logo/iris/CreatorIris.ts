@@ -91,7 +91,7 @@ export class CreatorIris extends CreatorBase {
 
     // ドーナツ中央の位置を通る円の円周
     // const aroundDis: number = dis * 2 * Math.PI;
-    const aroundDis: number = (props.innerRadius + props.outerRadius * 0.5) * 2 * Math.PI;
+    const aroundDis: number = dis * 2 * Math.PI;
 
     // 尻尾も含めたトータルの距離(progressは無視)
     const allDis: number = props.onlyCircle ? aroundDis : aroundDis + props.outerRadius;
@@ -108,7 +108,7 @@ export class CreatorIris extends CreatorBase {
     // 尻尾も含めたトータルの距離(progressを考慮した全体の距離)
     const allDisProgress: number = props.onlyCircle ? aroundDis : aroundDis + tailH;
 
-    const circlePerProgress = aroundDis / allDisProgress;
+    // const circlePerProgress = aroundDis / allDisProgress;
 
     const progress: number = (props.division) * props.drawProgress;
 
