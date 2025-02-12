@@ -92,6 +92,8 @@ export class CreatorPaint extends CreatorBase {
       // const ark: ArkFill = new ArkFill(props.outerRadius, props.innerRadius, rad * i, col, opacity);
       // this.arkContainer.insertBefore(ark.element, this.arkContainer.firstChild);
 
+      const r2 = (i === (progress - 21)) ? 6.28 : (rad * i + rad + props.paintOverlap);
+
       const ark: ArkFill2 = new ArkFill2(
         props.outerRadius,
         props.innerRadius,

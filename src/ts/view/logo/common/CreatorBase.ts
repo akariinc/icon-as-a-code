@@ -106,7 +106,7 @@ export class CreatorBase {
     // (svgElm.querySelector('.svg-body') as SVGGElement).setAttribute('transform', '');
 
     const svg = svgElm.outerHTML;
-    console.log('svg = ' + svg);
+    // console.log('svg = ' + svg);
     var url = 'data:text/plain;charset=utf-8,' + encodeURIComponent(svg);
     this.buttonDownload.setAttribute('href', url);
   }
