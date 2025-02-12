@@ -38,7 +38,7 @@ export class Slider {
     // }
 
     input.addEventListener('change', () => {
-      console.log(input.value);
+      // console.log(input.value);
       this.updateText(input.value);
 
       if (this.onChange) {
@@ -46,7 +46,7 @@ export class Slider {
       }
     });
     input.addEventListener('input', () => {
-      console.log(input.value);
+      // console.log(input.value);
       this.updateText(input.value);
 
       if (this.onChange) {

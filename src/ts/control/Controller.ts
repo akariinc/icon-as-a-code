@@ -44,6 +44,9 @@ export class Controller {
       rgbEnd: '',
       rgbCurve: 'linear',
 
+      paintDivision: 300,
+      paintOverlap: 0.02,
+
       animCurve: 'linear',
       animDuration: 1
     };
@@ -53,9 +56,6 @@ export class Controller {
     this.selectCreator = this.creatorIris;
     this.setUIEvent();
 
-    this.selectCreator.update(this.props);
-    this.creatorPaint.update(this.props);
-
     this.changeType(((document.getElementById('shapeType0') as HTMLInputElement).checked) ? '0' : '1');
     // console.log(svg);
 
@@ -64,6 +64,9 @@ export class Controller {
       console.log('click');
       this.selectCreator.anim(Object.assign({}, this.props));
     });
+
+    this.creatorPaint.update(this.props);
+    this.selectCreator.update(this.props);
   }
 
   private setUIEvent() {

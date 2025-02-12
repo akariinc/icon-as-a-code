@@ -98,7 +98,15 @@ export class CreatorBase {
   }
 
   protected updateDownloadHref() {
-    const svg = this.svg.outerHTML;
+    const svgElm: SVGElement = this.svg.cloneNode(true) as SVGElement;
+
+    svgElm.setAttribute('transform', '');
+    svgElm.setAttribute('style', '');
+
+    // (svgElm.querySelector('.svg-body') as SVGGElement).setAttribute('transform', '');
+
+    const svg = svgElm.outerHTML;
+    console.log('svg = ' + svg);
     var url = 'data:text/plain;charset=utf-8,' + encodeURIComponent(svg);
     this.buttonDownload.setAttribute('href', url);
   }

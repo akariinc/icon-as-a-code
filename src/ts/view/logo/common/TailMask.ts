@@ -13,10 +13,9 @@ export class TailMask extends ShapeBase {
     // this.element.setAttribute('transform', 'translate(-10, -10)');
   }
 
-  public draw(props: LogoProperty, progress: number): void {
+  public draw(props: LogoProperty, h: number): void {
     const r = props.outerRadius;
     const inner = props.innerRadius;
-    const h = r * progress;
 
     const rad = Math.asin(h / r);
 
@@ -29,7 +28,7 @@ export class TailMask extends ShapeBase {
 
     this.element.setAttribute('id', 'iris-mask');
     this.element.setAttribute('fill', 'red');
-    this.element.setAttribute('opacity', '0.7');
+    this.element.setAttribute('opacity', '0.4');
     // this.element.setAttribute(
     //   'd',
     //   `

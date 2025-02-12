@@ -18,6 +18,9 @@ export interface LogoProperty {
   rgbEnd: string;
   rgbCurve: string;
 
+  paintDivision: number;
+  paintOverlap: number;
+
   animCurve: string;
   animDuration: number;
 };

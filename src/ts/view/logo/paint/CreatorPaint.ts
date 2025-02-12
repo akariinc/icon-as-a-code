@@ -4,6 +4,7 @@ import { getEasing } from '../../../util/easing';
 import { removeChild, removeChildren } from '../../../util/element';
 import { CreatorBase } from '../common/CreatorBase';
 import { ArkFill } from './ArkFill';
+import { ArkFill2 } from './ArkFill2';
 import { CircleMask } from './CircleMask';
 import { TailCircular } from './TailCircular';
 import { TailFill } from './TailFill';
@@ -40,10 +41,12 @@ export class CreatorPaint extends CreatorBase {
 
     this.tailCircular = new TailCircular();
     this.container.element.appendChild(this.tailCircular.element);
+
+    // this.container.element.appendChild(this.mask.element);
   }
 
   public update(props: LogoProperty): void {
-    // console.log('update paint');
+    // console.log('update paint', props.drawProgress);
 
     // 一旦すべてリムーブ
     removeChildren(this.arkContainer);
@@ -64,7 +67,7 @@ export class CreatorPaint extends CreatorBase {
     // const rad: number = (props.partAngle / 180) * Math.PI;
     // const div = 6.28 / rad;
 
-    const div = 300; //props.division;
+    const div = props.paintDivision;
     const rad = 6.28 / div;
 
     let progress = 0;
@@ -77,7 +80,7 @@ export class CreatorPaint extends CreatorBase {
       progress = Math.min(div, (div * props.drawProgress) / circlePer);
     }
 
-    console.log('circlePer', circlePer, 'drawProgress', props.drawProgress, 'progress', progress);
+    // console.log('circlePer', circlePer, 'drawProgress', props.drawProgress, 'progress', progress);
 
     for (var i = 0; i < progress; i++) {
       const per: number = (i / div) * circlePer;
@@ -85,19 +88,35 @@ export class CreatorPaint extends CreatorBase {
       const rgbPer: number = getEasing(props.rgbCurve, per);
       const col: string = getColorPercent(props.rgbStart, props.rgbEnd, rgbPer);
       const opacity: number = (props.opacityEnd - props.opacityStart) * getEasing(props.opacityCurve, per) + props.opacityStart;
-      // console.log(col);
-      const ark: ArkFill = new ArkFill(props.outerRadius, props.innerRadius, rad * i, col, opacity);
+
+      // const ark: ArkFill = new ArkFill(props.outerRadius, props.innerRadius, rad * i, col, opacity);
+      // this.arkContainer.insertBefore(ark.element, this.arkContainer.firstChild);
+
+      const ark: ArkFill2 = new ArkFill2(
+        props.outerRadius,
+        props.innerRadius,
+        rad * i,
+        rad * i + rad + props.paintOverlap,
+        col,
+        opacity);
       //      this.arkContainer.appendChild(ark.element);
       this.arkContainer.insertBefore(ark.element, this.arkContainer.firstChild);
     }
 
     // this.container.element.appendChild(this.mask.element);
-    this.mask.draw(props, (props.drawProgress - circlePer) / (1 - circlePer));
+    this.mask.draw(props, props.outerRadius * (props.drawProgress - circlePer) / (1 - circlePer));
 
     if (!props.onlyCircle) {
       // 尻尾ありかつ、drawProgressが尻尾までいっているかどうか
       if (props.drawProgress > circlePer) {
-        this.tail.draw(props.outerRadius, props.innerRadius, getColorPercent(props.rgbStart, props.rgbEnd, getEasing(props.rgbCurve, circlePer)), props.rgbEnd, (props.opacityEnd - props.opacityStart) * circlePer + props.opacityStart, props.opacityEnd, (props.drawProgress - circlePer) / (1 - circlePer));
+        this.tail.draw(
+          props.outerRadius,
+          props.innerRadius,
+          getColorPercent(props.rgbStart, props.rgbEnd, getEasing(props.rgbCurve, circlePer)),
+          props.rgbEnd,
+          (props.opacityEnd - props.opacityStart) * circlePer + props.opacityStart,
+          props.opacityEnd,
+          (props.drawProgress - circlePer) / (1 - circlePer));
         this.container.element.appendChild(this.tail.element);
       } else {
         removeChild(this.container.element, this.tail.element);

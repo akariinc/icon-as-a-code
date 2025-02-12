@@ -3,6 +3,8 @@ import { ShapeBase } from "../common/ShapeBase";
 
 export class IrisLine extends ShapeBase {
 
+  public edgeY: number = 0;
+
   // ここのperはテールの距離を含めて0 - 1の値
   // onlyCircleがtrueの場合は、perが1のものが、そもそも来ない
   constructor(col: string, opacity: number, width: number, height: number, dis: number, aroundDis: number, allDis: number, tailHeight: number, per: number) {
@@ -28,8 +30,6 @@ export class IrisLine extends ShapeBase {
 
       // 円周上に配置されるライン
 
-      // console.log('myDis', myDis, 'aroundDis', aroundDis, 'allDis', allDis, 'circlePer', circlePer);
-
       const r: number = 6.28 * circlePer;
       const x: number = Math.cos(r) * dis;
       const y: number = Math.sin(r) * dis;
@@ -48,15 +48,11 @@ export class IrisLine extends ShapeBase {
 
       const per3 = ((myDis - aroundDis) / (allDis - aroundDis)) || 0; // NaN対策（0/0の場合）
 
-      // console.log('per3, realHeight', per3, realHeight);
-
-      // console.log('per3 = ', per3);
-
-      // const tailPer: number = 
-
       this.setAttributes(this.element, {
         transform: 'translate(' + dis + ', ' + (per3 * realHeight) + ')'
       });
+
+      this.edgeY = (per3 * realHeight) + (height / 2);
     }
 
   }
