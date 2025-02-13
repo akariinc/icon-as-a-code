@@ -16,8 +16,6 @@ const { CheckerPlugin } = require('awesome-typescript-loader');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 
 const CopyPlugin = require('copy-webpack-plugin');
-const ImageminPlugin = require('imagemin-webpack-plugin').default;
-const ImageminMozjpeg = require('imagemin-mozjpeg');
 
 /*
  * SplitChunksPlugin is enabled by default and replaced
@@ -88,26 +86,6 @@ const getApp = (env) => {
         },
       ],
     }),
-
-    new ImageminPlugin({
-      test: /\.(jpe?g|png|gif|svg)$/i,
-      pngquant: {
-        quality: '70-80',
-      },
-      gifsicle: {
-        interlaced: false,
-        optimizationLevel: 10,
-        colors: 256,
-      },
-      svgo: {},
-      plugins: [
-        /*ImageminMozjpeg({
-            quality: 85,
-            progressive: true,
-          }),*/
-      ],
-    }),
-
     new CheckerPlugin(),
     new CircularDependencyPlugin({
       cwd: process.cwd(),
@@ -175,10 +153,6 @@ const getApp = (env) => {
 
     resolve: {
       extensions: ['.ts', '.js'],
-      // Webpackで利用するときの設定
-      alias: {
-        vue: 'vue/dist/vue.js',
-      },
     },
 
     plugins: plugins,

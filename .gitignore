@@ -5,6 +5,8 @@
 Thumbs.db
 ehthumbs.db
 
+dist/
+
 # Thumbnails
 ._*
 
@@ -22,7 +24,7 @@ tmp/
 
 # npm debug log
 npm-debug.log
-package-lock.json
+# package-lock.json
 
 # sublimetext project settings
 *.sublime-workspace
