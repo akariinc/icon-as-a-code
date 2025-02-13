@@ -1,6 +1,9 @@
 import { LogoProperty } from '../../../info/LogoProperty';
 import { ShapeBase } from '../common/ShapeBase';
 
+/*
+ * 尻尾部分の四角形
+ */
 export class TailFill extends ShapeBase {
   private stop0: SVGStopElement;
 
@@ -33,21 +36,6 @@ export class TailFill extends ShapeBase {
     grad.appendChild(stop1);
     defs.appendChild(grad);
 
-    /*
-    <defs>
-    <linearGradient id="Gradient1">
-      <stop class="stop1" offset="0%" />
-      <stop class="stop2" offset="50%" />
-      <stop class="stop3" offset="100%" />
-    </linearGradient>
-    <linearGradient id="Gradient2" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stop-color="red" />
-      <stop offset="50%" stop-color="black" stop-opacity="0" />
-      <stop offset="100%" stop-color="blue" />
-    </linearGradient>
-  </defs>
-    */
-
     const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
     this.setAttributes(rect, {
       fill: 'url(#grad)',
@@ -62,7 +50,7 @@ export class TailFill extends ShapeBase {
     this.element.appendChild(rect);
   }
 
-  public draw(outer: number, inner: number, rgbStart: string, rgbEnd: string, opacityStart: number, opacityEnd: number, progress: number): void {
+  public draw(outer: number, inner: number, rgbStart: string, rgbEnd: string, opacityStart: number, opacityEnd: number, progress: number, height: number): void {
     // console.log('opacityStart', opacityStart, 'opacityEnd', opacityEnd);
 
     // console.log('progress', progress);
@@ -77,7 +65,7 @@ export class TailFill extends ShapeBase {
 
     this.setAttributes(this.rect, {
       width: outer - inner,
-      height: outer * progress,
+      height: height * progress,
       transform: 'translate(' + inner + ', 0)',
     });
   }

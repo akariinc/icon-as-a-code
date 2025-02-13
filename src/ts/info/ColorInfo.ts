@@ -20,7 +20,6 @@ export class ColorInfo {
     this.color = color;
     this.alpha = alpha;
     this.lineColor = lineColor;
-    //this.lineAlpha = alpha;
 
     this.hasColor = color != "";
     this.hasLineColor = lineColor != "";

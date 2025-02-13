@@ -23,23 +23,6 @@ export class CreatorBase {
     this.svg = this.parent;
 
     this.mask = new TailMask(id);
-    // this.props = {
-    //   onlyCircle: false,
-    //   drawProgress: 0,
-    //   innerRadius: 0,
-    //   outerRadius: 0,
-    //   // shapeType: 'iris',
-    //   partAngle: 1,
-    //   mask: false,
-
-    //   opacityStart: 0,
-    //   opacityEnd: 0,
-
-    //   rgbStart: '',
-    //   rgbEnd: ''
-    // };
-
-    // this.parent.appendChild(this.container.element);
 
     this.buttonDownload = document.getElementById('button-execute');
     this.buttonDownload.setAttribute('download', 'logo.svg');

@@ -44,42 +44,13 @@ export class CreatorIris extends CreatorBase {
   }
 
   public update(props: LogoProperty): void {
-    // console.log('update iris', props.lineTickness);
 
     // removeChildren(this.container.element);
     removeChildren(this.lineContainer);
     removeChildren(this.lineTailContainer);
-    // this.container.element.appendChild(this.lineContainer);
 
-    if (!props.onlyCircle) {
-      // this.tail = new Tail(props);
-      // this.container.element.appendChild(this.tail.element);
-    }
-
-    // const rad: number = (props.partAngle / 180) * Math.PI;
-    // const div = 6.28 / rad;
-
-    // const div = props.division;
-    // const rad = 6.28 / div;
-
-    // for (var i = 0; i < div; i++) {
-    //   const line: LineSimple = new LineSimple(props.outerRadius, props.innerRadius, rad * i, props.lineTickness);
-    //   this.container.element.appendChild(line.element);
-    // }
-
-    // if (!props.onlyCircle) {
-    //   this.tail.draw(
-    //     props.outerRadius,
-    //     props.innerRadius,
-    //     props.rgbStart,
-    //     props.rgbEnd,
-    //     props.opacityStart,
-    //     props.opacityEnd
-    //   );
-    //   this.container.element.appendChild(this.tail.element);
-    // } else {
-    //   this.container.element.removeChild(this.tail.element);
-    // }
+    // 尻尾の長さ
+    const tailBaseHeight: number = props.outerRadius * ((props.tailEndDistance == 0) ? 1 : (65.75 / 70.43));
 
     // ラインの幅
     const width: number = props.outerRadius - props.innerRadius;
@@ -94,27 +65,15 @@ export class CreatorIris extends CreatorBase {
     const aroundDis: number = dis * 2 * Math.PI;
 
     // 尻尾も含めたトータルの距離(progressは無視)
-    const allDis: number = props.onlyCircle ? aroundDis : aroundDis + props.outerRadius;
-
-    // const offsetX = -width / 2;
-    // const offsetY = -height / 2;
-
-    // console.log('curve', props.opacityCurve);
+    const allDis: number = props.onlyCircle ? aroundDis : aroundDis + tailBaseHeight;
 
     const circlePer = aroundDis / allDis;
-
-    const tailH: number = props.outerRadius * ((props.drawProgress - circlePer) / (1 - circlePer));
-
-    // 尻尾も含めたトータルの距離(progressを考慮した全体の距離)
-    const allDisProgress: number = props.onlyCircle ? aroundDis : aroundDis + tailH;
-
-    // const circlePerProgress = aroundDis / allDisProgress;
 
     const progress: number = (props.division) * props.drawProgress;
 
     const lines: IrisLine[] = [];
 
-    const maskH: number = props.outerRadius * (props.drawProgress - circlePer) / (1 - circlePer);
+    const maskH: number = tailBaseHeight * (props.drawProgress - circlePer) / (1 - circlePer);
     let realMaskH: number = 0;
 
     for (var i = 0; i <= progress; i++) {
@@ -123,7 +82,7 @@ export class CreatorIris extends CreatorBase {
       const rgbPer: number = getEasing(props.rgbCurve, per);
       const color: string = getColorPercent(props.rgbStart, props.rgbEnd, rgbPer);
       const opacity: number = (props.opacityEnd - props.opacityStart) * opacityPer + props.opacityStart;
-      const line: IrisLine = new IrisLine(color, opacity, width, height, dis, aroundDis, allDis, props.outerRadius, per);
+      const line: IrisLine = new IrisLine(color, opacity, width, height, dis, aroundDis, allDis, tailBaseHeight, per);
       lines.push(line);
 
       const myDis: number = allDis * per;
@@ -146,12 +105,7 @@ export class CreatorIris extends CreatorBase {
       }
     }
 
-    // console.log('realMaskH = ' + realMaskH, 'maskH = ' + maskH);
-
-    // this.container.element.appendChild(this.mask.element);
     this.mask.draw(props, realMaskH);
-
-    // this.lineContainer.setAttribute('transform', 'translate(' + offsetX + ', ' + offsetY + ')');
 
     this.updateDownloadHref();
   }

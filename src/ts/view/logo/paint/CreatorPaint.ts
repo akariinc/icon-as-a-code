@@ -3,9 +3,7 @@ import { getColorPercent } from '../../../util/color';
 import { getEasing } from '../../../util/easing';
 import { removeChild, removeChildren } from '../../../util/element';
 import { CreatorBase } from '../common/CreatorBase';
-import { ArkFill } from './ArkFill';
 import { ArkFill2 } from './ArkFill2';
-import { CircleMask } from './CircleMask';
 import { TailCircular } from './TailCircular';
 import { TailFill } from './TailFill';
 
@@ -53,8 +51,11 @@ export class CreatorPaint extends CreatorBase {
 
     // this.circleMask.draw(props.outerRadius);
 
+    // 尻尾の長さ
+    const tailBaseHeight: number = props.outerRadius * ((props.tailEndDistance == 0) ? 1 : (65.75 / 70.43));
+
     const aroundDis: number = (props.innerRadius + props.outerRadius * 0.5) * 2 * Math.PI;
-    const allDis: number = aroundDis + props.outerRadius;
+    const allDis: number = aroundDis + tailBaseHeight;
 
     const circlePer = aroundDis / allDis;
 
@@ -118,7 +119,8 @@ export class CreatorPaint extends CreatorBase {
           props.rgbEnd,
           (props.opacityEnd - props.opacityStart) * circlePer + props.opacityStart,
           props.opacityEnd,
-          (props.drawProgress - circlePer) / (1 - circlePer));
+          (props.drawProgress - circlePer) / (1 - circlePer),
+          tailBaseHeight);
         this.container.element.appendChild(this.tail.element);
       } else {
         removeChild(this.container.element, this.tail.element);

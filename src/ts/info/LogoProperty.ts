@@ -3,9 +3,8 @@ export interface LogoProperty {
   drawProgress: number;
   innerRadius: number;
   outerRadius: number;
-  // shapeType: 'iris' | 'paint';
+  tailEndDistance: number;
   lineTickness: number;
-  // partAngle: number;
   division: number;
   mask: boolean;
   lineCap: 'rectangular' | 'circular';

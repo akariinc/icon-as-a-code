@@ -30,23 +30,10 @@ export class TailMask extends ShapeBase {
 
     const rad = Math.asin(h / r);
 
-    const x2 = Math.cos(rad) * r;
+    // const x2 = Math.cos(rad) * r;
 
-    const x = Math.cos(rad) * r;
-    const y = Math.sin(rad) * r;
-
-    // console.log('rad = ' + rad, ', x = ' + x2);
-
-    // this.element.setAttribute(
-    //   'd',
-    //   `
-    //   M10,0
-    //   A10,10 0 1 1 -10,0
-    //   A10,10 0 1 1 10,0
-    //   L${inner},0 L${inner},${h} L${x2},${h}
-    //   Z
-    // `
-    // );
+    // const x = Math.cos(rad) * r;
+    // const y = Math.sin(rad) * r;
 
     // this.element.setAttribute(
     //   'd',

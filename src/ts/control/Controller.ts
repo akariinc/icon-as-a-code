@@ -20,12 +20,6 @@ export class Controller {
   constructor() {
     this.sideUI = document.querySelector('.js-side') as HTMLElement;
 
-    // for (var i = 0; i < 100; i++) {
-    //   const t = (i + 1) / 100;
-    //   const easing = easeInOutQuad(t);
-    //   console.log(i, t, easing);
-    // }
-
     this.props = {
       onlyCircle: false,
       drawProgress: 0,
@@ -34,6 +28,7 @@ export class Controller {
       lineTickness: 0.1,
       division: 1,
       mask: false,
+      tailEndDistance: 0,
       lineCap: 'rectangular',
 
       opacityStart: 0,
@@ -57,7 +52,6 @@ export class Controller {
     this.setUIEvent();
 
     this.changeType(((document.getElementById('shapeType0') as HTMLInputElement).checked) ? '0' : '1');
-    // console.log(svg);
 
     const buttonAnimPlay: HTMLElement = document.getElementById('button-play') as HTMLElement;
     buttonAnimPlay.addEventListener('click', () => {
@@ -132,25 +126,12 @@ export class Controller {
     for (var i = 0; i < typeRadios.length; i++) {
       const radio: HTMLInputElement = typeRadios[i];
       radio.addEventListener('change', (e: Event) => {
-
-        console.log(radio.name, radio.value);
-
         if (radio.name === 'shapeType') {
           this.changeType(radio.value);
         } else {
           this.props[radio.name] = (e.target as HTMLInputElement).value;
           console.log(radio.name + ' = ' + this.props[radio.name]);
         }
-        // console.log(radio.value === '0');
-        // if (radio.value === '0') {
-        //   this.sideUI.classList.add('--iris');
-        //   this.sideUI.classList.remove('--paint');
-        //   this.selectCreator = this.creatorIris;
-        // } else {
-        //   this.sideUI.classList.remove('--iris');
-        //   this.sideUI.classList.add('--paint');
-        //   this.selectCreator = this.creatorPaint;
-        // }
 
         this.selectCreator.update(this.props);
       });
