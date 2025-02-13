@@ -125,8 +125,9 @@ export class CreatorPaint extends CreatorBase {
       }
 
       if (props.lineCap === 'circular') {
-        this.tailCircular.draw(props);
-        this.container.element.appendChild(this.tailCircular.element);
+        // 未実装
+        // this.tailCircular.draw(props);
+        // this.container.element.appendChild(this.tailCircular.element);
       } else {
         removeChild(this.container.element, this.tailCircular.element);
         // this.container.element.removeChild(this.tailCircular.element);

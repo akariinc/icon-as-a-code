@@ -9,7 +9,7 @@ export class ArkFill2 extends ShapeBase {
 
     const r = outer;
 
-    console.log('ark2 draw', r1, r2);
+    // console.log('ark2 draw', r1, r2);
 
     const startInX: number = Math.cos(r1) * inner;
     const startInY: number = Math.sin(r1) * inner;

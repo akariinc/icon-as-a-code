@@ -17,12 +17,12 @@ export class CreatorBase {
 
   protected mask: TailMask;
 
-  constructor(id: string) {
+  constructor(id: 'iris' | 'paint') {
     this.parent = document.getElementById('my-svg') as HTMLElement;
     this.container = new Container(id);
     this.svg = this.parent;
 
-    this.mask = new TailMask();
+    this.mask = new TailMask(id);
     // this.props = {
     //   onlyCircle: false,
     //   drawProgress: 0,

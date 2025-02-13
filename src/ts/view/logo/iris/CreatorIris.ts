@@ -117,8 +117,8 @@ export class CreatorIris extends CreatorBase {
     const maskH: number = props.outerRadius * (props.drawProgress - circlePer) / (1 - circlePer);
     let realMaskH: number = 0;
 
-    for (var i = 0; i < progress; i++) {
-      const per = (i + 1) / props.division; // * (aroundDis / allDis);
+    for (var i = 0; i <= progress; i++) {
+      const per = (i ) / props.division; // * (aroundDis / allDis);
       const opacityPer: number = getEasing(props.opacityCurve, per);
       const rgbPer: number = getEasing(props.rgbCurve, per);
       const color: string = getColorPercent(props.rgbStart, props.rgbEnd, rgbPer);
@@ -127,10 +127,16 @@ export class CreatorIris extends CreatorBase {
       lines.push(line);
 
       const myDis: number = allDis * per;
-      const myCirclePer = myDis / aroundDis;
+
+      const myCirclePer = myDis / (aroundDis * 1);
 
       if (myCirclePer < 1) {
-        this.lineContainer.appendChild(line.element);
+        if (myCirclePer < 0.75) {
+          this.lineContainer.appendChild(line.element);
+        } else {
+          // 円の3/4まで行ったら、マスクされることはないと見なす
+          this.lineTailContainer.appendChild(line.element);
+        }
       } else {
 
         if (line.edgeY <= maskH) {
@@ -140,7 +146,7 @@ export class CreatorIris extends CreatorBase {
       }
     }
 
-    console.log('realMaskH = ' + realMaskH, 'maskH = ' + maskH);
+    // console.log('realMaskH = ' + realMaskH, 'maskH = ' + maskH);
 
     // this.container.element.appendChild(this.mask.element);
     this.mask.draw(props, realMaskH);
