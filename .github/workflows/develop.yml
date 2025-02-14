@@ -38,3 +38,8 @@ jobs:
 
       - name: Run unit tests and code coverage
         run: yarn test:coverage
+
+      - name: Publish build
+        run: ./scripts/circleci/publish-build.sh
+        env:
+          SNAPSHOT_BUILDS_GITHUB_TOKEN: ${{ secrets.SNAPSHOT_BUILDS_GITHUB_TOKEN }}
