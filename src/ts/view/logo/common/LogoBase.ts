@@ -49,11 +49,11 @@ export class LogoBase {
     this.props = { ...this.props, ...props } as LogoProperty;
   }
 
-  public show(): void {
+  public append(): void {
     this.svg.appendChild(this.rootGraphics.element);
   }
 
-  public hide(): void {
+  public remove(): void {
     removeChild(this.svg, this.rootGraphics.element);
   }
 

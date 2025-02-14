@@ -16,13 +16,13 @@ export class AkariLogo {
   set type(value: "iris" | "paint") {
     this._type = value;
     if (this.svgLogo) {
-      this.svgLogo.hide();
+      this.svgLogo.remove();
     }
     this.svgLogo =
       this.type === "iris"
         ? new IrisLogo(this.el, this.props)
         : new PaintLogo(this.el, this.props);
-    this.svgLogo.show();
+    this.svgLogo.append();
   }
 
   get size(): number {
@@ -34,20 +34,46 @@ export class AkariLogo {
 
   props: LogoProperty;
 
-  constructor(type: "iris" | "paint", props: LogoProperty) {
-    this.props = props;
-    // this.el = document.createElement("svg");
+  constructor(type: "iris" | "paint", props: Partial<LogoProperty>) {
+    this.props = {
+      onlyCircle: false,
+      drawProgress: 0,
+      innerRadius: 0,
+      outerRadius: 0,
+      lineThickness: 0.1,
+      division: 1,
+      mask: false,
+      tailEndDistance: 0,
+      // TODO: leave it for now
+      // lineCap: "rectangular",
+
+      opacityStart: 0,
+      opacityEnd: 0,
+      opacityCurve: "linear",
+
+      rgbStart: "",
+      rgbEnd: "",
+      rgbCurve: "linear",
+
+      paintDivision: 4,
+      paintOverlap: 0.02,
+
+      animCurve: "linear",
+      animDuration: 1,
+      ...props,
+    };
+
     this.el = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    // this.el.createElementNS("xmlns", "http://www.w3.org/2000/svg");
     this.el.setAttribute("width", "100");
     this.el.setAttribute("height", "100");
     this.el.setAttribute("viewBox", "0 0 26 26");
+
     this._type = type;
     this.svgLogo =
       this.type === "iris"
         ? new IrisLogo(this.el, this.props)
         : new PaintLogo(this.el, this.props);
-    this.svgLogo.show();
+    this.svgLogo.append();
   }
 
   update(props: Partial<LogoProperty>): void {
