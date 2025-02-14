@@ -4,21 +4,25 @@
 // Foundation
 // ==========================================================================
 
-@import 'foundation/color';
-@import 'foundation/font';
-@import 'foundation/reset';
-@import 'foundation/variables';
-@import 'foundation/mixin';
+@use 'foundation/color';
+@use 'foundation/font';
+@use 'foundation/reset';
+@use 'foundation/variables';
+@use 'foundation/mixin';
 
 // ==========================================================================
 // Layout
 // ==========================================================================
 
-@import 'layout/**';
+@use 'layout/l-main';
 
 // -----------------------------------------------------------------
 // Utility
 // -----------------------------------------------------------------
 
-@import 'object/component/**';
-@import 'object/utility/**';
+@use 'object/component/button';
+@use 'object/component/colorpicker';
+@use 'object/component/slider';
+@use 'object/utility/u-flex';
+@use 'object/utility/u-margin';
+@use 'object/utility/u-padding';

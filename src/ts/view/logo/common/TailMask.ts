@@ -1,23 +1,21 @@
-import { LogoProperty } from '../../../info/LogoProperty';
-import { ShapeBase } from './ShapeBase';
+import { LogoProperty } from "../../../info/LogoProperty";
+import { ShapeBase } from "./ShapeBase";
 
 /*
  * maskオンのときに、円と尻尾が重なる部分だけ描画しないためのマスク
  * iris/paint共用
  */
 export class TailMask extends ShapeBase {
-  private type: 'iris' | 'paint';
+  private type: "iris" | "paint";
 
-  constructor(type: 'iris' | 'paint') {
-    super();
+  constructor(type: "iris" | "paint") {
+    super("path");
 
     this.type = type;
 
-    this.element = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-
-    this.element.setAttribute('class', 'iris-mask');
-    this.element.setAttribute('fill', 'red');
-    this.element.setAttribute('opacity', '0.4');
+    this.element.setAttribute("class", "iris-mask");
+    this.element.setAttribute("fill", "red");
+    this.element.setAttribute("opacity", "0.4");
     // this.element.setAttribute('d', `
     //   M12,13v-3h8C20,4.48,15.52,0,10,0S0,4.48,0,10s4.48,10,10,10c4.48,0,8.27-2.94,9.54-7h-7.54Z
     // `);
@@ -53,90 +51,87 @@ export class TailMask extends ShapeBase {
     if (props.mask) {
       const thresholdY: number = Math.sqrt(r * r - inner * inner);
 
-      let circleEndEdge = '';
+      let circleEndEdge = "";
 
-      if (this.type === 'iris') {
+      if (this.type === "iris") {
         // １本目のラインのマスクを正確に隠すための補正
         if (h === 0) {
           circleEndEdge = `
           L${inner},0 
           `;
         } else {
-          const halfTickness: number = props.lineTickness * 0.5;
+          const halfTickness: number = props.lineThickness * 0.5;
 
           circleEndEdge = `
-          L${r},${-halfTickness} 
-          L${inner},${-halfTickness} 
-          L${inner},0 
+          L${r},${-halfTickness}
+          L${inner},${-halfTickness}
+          L${inner},0
           `;
         }
       } else {
         circleEndEdge = `
-        L${inner},0 
+        L${inner},0
         `;
       }
 
       if (h <= 0) {
-
         // maskオフの場合はシンプルに円を描画
         this.element.setAttribute(
-          'd',
-            `
-          M${r},0 
-          A${r},${r} 0 0 1 0,${r} 
-          A${r},${r} 0 0 1 ${-r},0 
-          A${r},${r} 0 0 1 0,${-r} 
-          A${r},${r} 0 0 1 ${r},0 
+          "d",
+          `
+          M${r},0
+          A${r},${r} 0 0 1 0,${r}
+          A${r},${r} 0 0 1 ${-r},0
+          A${r},${r} 0 0 1 0,${-r}
+          A${r},${r} 0 0 1 ${r},0
           Z
         `
-          );
-
+        );
       } else if (thresholdY < h) {
         const rad2 = Math.atan2(thresholdY, inner);
         // 尻尾の末端が円からはみ出ている（Type1）
-        console.log('shape1');
+        console.log("shape1");
         this.element.setAttribute(
-          'd',
+          "d",
           `
           M${inner},0
-          L${inner},${Math.sin(rad2) * r} 
-          A${r},${r} 0 0 1 0,${r} 
-          A${r},${r} 0 0 1 ${-r},0 
-          A${r},${r} 0 0 1 0,${-r} 
-          A${r},${r} 0 0 1 ${r},0 
+          L${inner},${Math.sin(rad2) * r}
+          A${r},${r} 0 0 1 0,${r}
+          A${r},${r} 0 0 1 ${-r},0
+          A${r},${r} 0 0 1 0,${-r}
+          A${r},${r} 0 0 1 ${r},0
           ${circleEndEdge}
           Z
         `
         );
       } else {
         // 尻尾の末端が円からはみ出ている（Type2）
-        console.log('shape2');
+        console.log("shape2");
         this.element.setAttribute(
-          'd',
+          "d",
           `
           M${inner},0
-          L${inner},${Math.sin(rad) * r} 
-          L${Math.cos(rad) * r},${Math.sin(rad) * r} 
-          A${r},${r} 0 0 1 0,${r} 
-          A${r},${r} 0 0 1 ${-r},0 
-          A${r},${r} 0 0 1 0,${-r} 
-          A${r},${r} 0 0 1 ${r},0 
+          L${inner},${Math.sin(rad) * r}
+          L${Math.cos(rad) * r},${Math.sin(rad) * r}
+          A${r},${r} 0 0 1 0,${r}
+          A${r},${r} 0 0 1 ${-r},0
+          A${r},${r} 0 0 1 0,${-r}
+          A${r},${r} 0 0 1 ${r},0
           ${circleEndEdge}
           Z
         `
         );
       }
     } else {
-
       // maskオフの場合はシンプルに円を描画
       this.element.setAttribute(
-        'd',
+        "d",
         `
-        M${r},0 
-        A${r},${r} 0 0 1 0,${r} 
-        A${r},${r} 0 0 1 ${-r},0 
-        A${r},${r} 0 0 1 0,${-r} 
-        A${r},${r} 0 0 1 ${r},0 
+        M${r},0
+        A${r},${r} 0 0 1 0,${r}
+        A${r},${r} 0 0 1 ${-r},0
+        A${r},${r} 0 0 1 0,${-r}
+        A${r},${r} 0 0 1 ${r},0
         Z
       `
       );

@@ -1,30 +1,29 @@
-import { removeChildren } from "../../../util/element";
 import { ShapeBase } from "../common/ShapeBase";
+import { removeChildren } from "../../../util/element";
 
 export class TailLines extends ShapeBase {
-
   constructor() {
-    super();
-
-    this.element = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    super("g");
   }
 
-
-  public draw(outer: number, inner: number, rgbStart: string, rgbEnd: string, opacityStart: number, opacityEnd: number): void {
+  // eslint-disable-next-line prettier/prettier
+  public draw(outer: number, inner: number, rgbStart: string, rgbEnd: string): void {
 
     console.log(rgbStart, rgbEnd);
 
     removeChildren(this.element);
 
-    for (var i = 0; i < 10; i++) {
-
-      const line = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    for (let i = 0; i < 10; i++) {
+      const line = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "rect"
+      );
       this.setAttributes(line, {
         width: outer - inner,
         height: 0.3,
-        fill: '#f00',
+        fill: "#f00",
         opacity: 1,
-        transform: 'translate(0, ' + (i * 1) + ')'
+        transform: `translate(0, ${i * 1})`,
       });
 
       this.element.appendChild(line);
@@ -36,7 +35,7 @@ export class TailLines extends ShapeBase {
     this.setAttributes(this.element, {
       width: outer - inner,
       height: outer,
-      transform: 'translate(' + inner + ', 0)',
+      transform: `translate(${inner}, 0)`,
     });
   }
 }

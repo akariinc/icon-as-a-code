@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <title>Icon as a code</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="descripttion" content="description">
+  <meta name="keywords" content="keywords">
+  <script type="module" src="/src/index.ts"></script>
+</head>
+
+<body>
+  <main class="l-main">
+    <div class="l-main__side js-side --paint">
+      <div class="l-main__form-box">
+        <p>shapeType</p>
+        <div class="l-main__radio-group js-radio-type">
+          <div class="c-radio"> <input type="radio" id="shapeType0" name="shapeType" value="0" data-name="shapeType"
+              checked><label for="shapeType0">Paint</label></div>
+          <div class="c-radio"> <input type="radio" id="shapeType1" name="shapeType" value="1"
+              data-name="shapeType"><label for="shapeType1">Iris</label></div>
+        </div>
+      </div>
+      <hr class="l-main__hr-wide">
+      <div class="l-main__form-box">
+        <p>tailEndDistance</p>
+        <div class="l-main__radio-group js-radio-type">
+          <div class="c-radio"> <input type="radio" id="tailEnd0" name="tailEndDistance" value="0"
+              data-name="tailEndDistance" checked><label for="tailEnd0">Full</label></div>
+          <div class="c-radio"> <input type="radio" id="tailEnd1" name="tailEndDistance" value="1"
+              data-name="tailEndDistance"><label for="tailEnd1">65.75/70.43</label></div>
+        </div>
+      </div>
+      <div class="l-main__form-box">
+        <div class="c-checkbox"> <input class="js-Checkbox" type="checkbox" id="test0" data-name="onlyCircle"><label
+            for="test0">onlyCircle</label></div>
+      </div>
+      <div class="l-main__form-box">
+        <div class="c-checkbox"> <input class="js-Checkbox" type="checkbox" id="test1" data-name="mask"><label
+            for="test1">mask</label></div>
+      </div>
+      <div class="l-main__form-box">
+        <div class="c-slider js-Slider" data-name="drawProgress" data-min="0" data-max="1">
+          <p>drawProgress <span class="c-slider__text js-SliderText">0</span></p><input type="range" min="0" max="1"
+            step="0.01" value="1">
+        </div>
+      </div>
+      <div class="l-main__form-box">
+        <div class="c-slider js-Slider" data-name="innerRadius" data-min="1" data-max="12">
+          <p>innerRadius <span class="c-slider__text js-SliderText">0</span></p><input type="range" min="1" max="12"
+            step="0.01" value="5">
+        </div>
+      </div>
+      <div class="l-main__form-box">
+        <div class="c-slider js-Slider" data-name="outerRadius" data-min="13" data-max="13">
+          <p>outerRadius <span class="c-slider__text js-SliderText">0</span></p><input type="range" min="13" max="13"
+            step="0.01" value="13">
+        </div>
+      </div>
+      <div class="l-main__form-box">
+        <div class="c-colorpicker js-ColorPicker" id="picker0" data-name="rgbStart">
+          <p>rgbStart</p>
+          <div class="c-colorpicker__columns">
+            <div class="c-colorpicker__left"><input type="color" value="#cccccc"></div>
+            <div class="c-colorpicker__right">
+              <p class="undefined__text js-text">#ffffff</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="l-main__form-box">
+        <div class="c-colorpicker js-ColorPicker" id="picker1" data-name="rgbEnd">
+          <p>rgbEnd</p>
+          <div class="c-colorpicker__columns">
+            <div class="c-colorpicker__left"><input type="color" value="#000000"></div>
+            <div class="c-colorpicker__right">
+              <p class="undefined__text js-text">#ffffff</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="l-main__form-box">
+        <div class="c-combobox">
+          <p>rgbCurve</p><select class="js-ComboBox" data-name="rgbCurve">
+            <option value="linear">linear</option>
+            <option value="easeInSine">easeInSine</option>
+            <option value="easeOutSine">easeOutSine</option>
+            <option value="easeInOutSine">easeInOutSine</option>
+            <option value="easeInQuad">easeInQuad</option>
+            <option value="easeOutQuad">easeOutQuad</option>
+            <option value="easeInOutQuad">easeInOutQuad</option>
+            <option value="easeInCubic">easeInCubic</option>
+            <option value="easeOutCubic">easeOutCubic</option>
+            <option value="easeInOutCubic">easeInOutCubic</option>
+            <option value="easeInQuart">easeInQuart</option>
+            <option value="easeOutQuart">easeOutQuart</option>
+            <option value="easeInOutQuart">easeInOutQuart</option>
+            <option value="easeInQuint">easeInQuint</option>
+            <option value="easeOutQuint">easeOutQuint</option>
+            <option value="easeInOutQuint">easeInOutQuint</option>
+            <option value="easeInExpo">easeInExpo</option>
+            <option value="easeOutExpo">easeOutExpo</option>
+            <option value="easeInOutExpo">easeInOutExpo</option>
+            <option value="easeInCirc">easeInCirc</option>
+            <option value="easeOutCirc">easeOutCirc</option>
+            <option value="easeInOutCirc">easeInOutCirc</option>
+          </select>
+        </div>
+      </div>
+      <hr>
+      <div class="l-main__form-box">
+        <div class="c-slider js-Slider" data-name="opacityStart" data-min="0" data-max="1">
+          <p>opacityStart <span class="c-slider__text js-SliderText">0</span></p><input type="range" min="0" max="1"
+            step="0.01" value="1">
+        </div>
+      </div>
+      <div class="l-main__form-box">
+        <div class="c-slider js-Slider" data-name="opacityEnd" data-min="0" data-max="1">
+          <p>opacityEnd <span class="c-slider__text js-SliderText">0</span></p><input type="range" min="0" max="1"
+            step="0.01" value="1">
+        </div>
+      </div>
+      <div class="l-main__form-box">
+        <div class="c-combobox">
+          <p>opacityCurve</p><select class="js-ComboBox" data-name="opacityCurve">
+            <option value="linear">linear</option>
+            <option value="easeInSine">easeInSine</option>
+            <option value="easeOutSine">easeOutSine</option>
+            <option value="easeInOutSine">easeInOutSine</option>
+            <option value="easeInQuad">easeInQuad</option>
+            <option value="easeOutQuad">easeOutQuad</option>
+            <option value="easeInOutQuad">easeInOutQuad</option>
+            <option value="easeInCubic">easeInCubic</option>
+            <option value="easeOutCubic">easeOutCubic</option>
+            <option value="easeInOutCubic">easeInOutCubic</option>
+            <option value="easeInQuart">easeInQuart</option>
+            <option value="easeOutQuart">easeOutQuart</option>
+            <option value="easeInOutQuart">easeInOutQuart</option>
+            <option value="easeInQuint">easeInQuint</option>
+            <option value="easeOutQuint">easeOutQuint</option>
+            <option value="easeInOutQuint">easeInOutQuint</option>
+            <option value="easeInExpo">easeInExpo</option>
+            <option value="easeOutExpo">easeOutExpo</option>
+            <option value="easeInOutExpo">easeInOutExpo</option>
+            <option value="easeInCirc">easeInCirc</option>
+            <option value="easeOutCirc">easeOutCirc</option>
+            <option value="easeInOutCirc">easeInOutCirc</option>
+          </select>
+        </div>
+      </div>
+      <hr>
+      <div class="type-iris">
+        <div class="l-main__form-box">
+          <div class="c-slider js-Slider" data-name="division" data-min="2" data-max="200">
+            <p>division <span class="c-slider__text js-SliderText">0</span></p><input type="range" min="2" max="200"
+              step="1" value="50">
+          </div>
+        </div>
+        <hr>
+        <div class="l-main__form-box">
+          <div class="c-slider js-Slider" data-name="lineThickness" data-min="0.01" data-max="1">
+            <p>lineThickness <span class="c-slider__text js-SliderText">0</span></p><input type="range" min="0.01"
+              max="1" step="0.01" value="0.3">
+          </div>
+        </div>
+        <hr>
+      </div>
+      <div class="type-paint">
+        <div class="l-main__form-box">
+          <div class="c-slider js-Slider" data-name="paintDivision" data-min="3" data-max="500">
+            <p>paintDivision <span class="c-slider__text js-SliderText">0</span></p><input type="range" min="3"
+              max="500" step="1" value="3">
+          </div>
+        </div>
+        <div class="l-main__form-box">
+          <div class="c-slider js-Slider" data-name="paintOverlap" data-min="0" data-max="0.1">
+            <p>paintOverlap <span class="c-slider__text js-SliderText">0</span></p><input type="range" min="0" max="0.1"
+              step="0.001" value="0.05">
+          </div>
+        </div>
+        <!-- Leave it for now
+        <p>LineCap</p>
+        <div class="l-main__radio-group js-radio-type">
+          <div class="c-radio"> <input type="radio" id="radio10" name="lineCap" value="rectangular" data-name="lineCap"
+              checked><label for="radio10">rectangular</label></div>
+          <div class="c-radio"> <input type="radio" id="radio11" name="lineCap" value="circular"
+              data-name="lineCap"><label for="radio11">circular</label></div>
+        </div> =
+        -->
+        <hr>
+      </div>
+      <div class="l-main__form-box"><a class="c-button" id="button-download-svg" href="#">ダウンロード</a></div>
+    </div>
+    <div class="l-main__right">
+      <div class="l-main__form-box">
+        <div class="c-slider js-Slider" data-name="animDuration" data-min="0.1" data-max="3">
+          <p>animDuration <span class="c-slider__text js-SliderText">0</span></p><input type="range" min="0.1" max="3"
+            step="0.01" value="1">
+        </div>
+      </div>
+      <div class="l-main__form-box">
+        <div class="c-combobox">
+          <p>animCurve</p><select class="js-ComboBox" data-name="animCurve">
+            <option value="linear">linear</option>
+            <option value="easeInSine">easeInSine</option>
+            <option value="easeOutSine">easeOutSine</option>
+            <option value="easeInOutSine">easeInOutSine</option>
+            <option value="easeInQuad">easeInQuad</option>
+            <option value="easeOutQuad">easeOutQuad</option>
+            <option value="easeInOutQuad">easeInOutQuad</option>
+            <option value="easeInCubic">easeInCubic</option>
+            <option value="easeOutCubic">easeOutCubic</option>
+            <option value="easeInOutCubic">easeInOutCubic</option>
+            <option value="easeInQuart">easeInQuart</option>
+            <option value="easeOutQuart">easeOutQuart</option>
+            <option value="easeInOutQuart">easeInOutQuart</option>
+            <option value="easeInQuint">easeInQuint</option>
+            <option value="easeOutQuint">easeOutQuint</option>
+            <option value="easeInOutQuint">easeInOutQuint</option>
+            <option value="easeInExpo">easeInExpo</option>
+            <option value="easeOutExpo">easeOutExpo</option>
+            <option value="easeInOutExpo">easeInOutExpo</option>
+            <option value="easeInCirc">easeInCirc</option>
+            <option value="easeOutCirc">easeOutCirc</option>
+            <option value="easeInOutCirc">easeInOutCirc</option>
+          </select>
+        </div>
+      </div>
+      <div class="l-main__form-box"><a class="c-button" id="button-play" href="#">アニメ再生</a></div>
+    </div>
+    <div class="l-main__foot">
+      <div class="l-main__form-box">
+        <div class="c-slider js-Slider" id="size" data-name="Size" data-min="10" data-max="800" data-noevent="true">
+          <p>Size <span class="c-slider__text js-SliderText">0</span></p><input type="range" min="10" max="800"
+            step="1" value="400">
+        </div>
+      </div>
+    </div>
+    <div class="l-main__body" id="logo-container"></div>
+  </main>
+</body>
+
+</html>

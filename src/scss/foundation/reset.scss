@@ -1,5 +1,5 @@
-@import './color.scss';
-@import './mixin.scss';
+@use './color.scss';
+@use './mixin.scss';
 
 /*************************************************
  * Reset CSS
@@ -35,7 +35,7 @@ dd {
 body {
   font-family: Hiragino Kaku Gothic Pro;
   font-size: 1rem;
-  color: $color-black;
+  color: black;
   word-break: break-all;
   overflow-x: hidden;
   // background-color: #f00;

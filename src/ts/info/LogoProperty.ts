@@ -4,10 +4,11 @@ export interface LogoProperty {
   innerRadius: number;
   outerRadius: number;
   tailEndDistance: number;
-  lineTickness: number;
+  lineThickness: number;
   division: number;
   mask: boolean;
-  lineCap: 'rectangular' | 'circular';
+  // TODO: leave it for now
+  // lineCap: "rectangular" | "circular";
 
   opacityStart: number;
   opacityEnd: number;
@@ -22,4 +23,6 @@ export interface LogoProperty {
 
   animCurve: string;
   animDuration: number;
-};
+
+  [ken: string]: string | number | boolean;
+}
