@@ -36,6 +36,11 @@ yarn dev
 
 ## Frontend Usage
 
+Add the following line to package.json. Choose build by commit hash for now.
+```
+"@akariinc/icon-as-a-code": "github:akariinc/icon-as-a-code-builds#master-e75ba9a",
+```
+
 Attaching the logo.
 
 ```typescript
