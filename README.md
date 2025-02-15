@@ -36,6 +36,8 @@ yarn dev
 
 ## Frontend Usage
 
+Attaching the logo.
+
 ```typescript
 import { AkariLogo } from "@akariinc/icon-as-a-code";
 
@@ -46,14 +48,18 @@ window.onload = () => {
   });
 
   const parentElement = document.getElementById("logo-parent");
-  akariLogo.size = 140.85;
+  parentElement?.appendChild(akariLogo.el);
+};
+```
+
+Update the attached logo.
+```typescript
+  // update properties
   akariLogo.update({
     drawProgress: 1,
     opacityStart: 1,
     opacityEnd: 1,
     rgbStart: "#999999",
+    size: 72,
   });
-
-  parentElement?.appendChild(akariLogo.el);
-};
 ```
