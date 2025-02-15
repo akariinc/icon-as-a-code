@@ -18,22 +18,22 @@ export class Controller {
 
     this.props = {
       onlyCircle: false,
-      drawProgress: 0,
-      innerRadius: 0,
-      outerRadius: 0,
-      lineThickness: 0.1,
-      division: 1,
+      drawProgress: 1,
+      innerRadius: 10,
+      outerRadius: 13,
+      lineThickness: 0.08,
+      division: 60,
       mask: false,
-      tailEndDistance: 0,
+      tailEndDistance: 1,
       // TODO: leave it for now
       // lineCap: "rectangular",
 
-      opacityStart: 0,
-      opacityEnd: 0,
+      opacityStart: 1,
+      opacityEnd: 1,
       opacityCurve: "linear",
 
-      rgbStart: "",
-      rgbEnd: "",
+      rgbStart: "#999999",
+      rgbEnd: "#444444",
       rgbCurve: "linear",
 
       paintDivision: 4,

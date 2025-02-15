@@ -23,6 +23,7 @@ export class AkariLogo {
         ? new IrisLogo(this.el, this.props)
         : new PaintLogo(this.el, this.props);
     this.svgLogo.append();
+    this.update(this.props);
   }
 
   get size(): number {
@@ -74,6 +75,7 @@ export class AkariLogo {
         ? new IrisLogo(this.el, this.props)
         : new PaintLogo(this.el, this.props);
     this.svgLogo.append();
+    this.update(this.props);
   }
 
   update(props: Partial<LogoProperty>): void {
