@@ -6,4 +6,3 @@ All notable changes to the "akariinc/icon-as-a-code" project will be documented 
 
 - Added renderer / exporter
 - Update publishing system
-

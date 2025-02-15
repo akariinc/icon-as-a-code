@@ -1,9 +1,7 @@
-
 /*
-  * 色情報クラス
-  */
+ * 色情報クラス
+ */
 export class ColorInfo {
-
   public color: string;
 
   public alpha: number;
@@ -25,9 +23,18 @@ export class ColorInfo {
     this.hasLineColor = lineColor != "";
   }
 
-
   public toString(): string {
-    return "col = " + this.color + ", lineCol = " + this.lineColor + ", alp = " + this.alpha + ", hasColor = " + this.hasColor + ", hasLineColor = " + this.hasLineColor;
+    return (
+      "col = " +
+      this.color +
+      ", lineCol = " +
+      this.lineColor +
+      ", alp = " +
+      this.alpha +
+      ", hasColor = " +
+      this.hasColor +
+      ", hasLineColor = " +
+      this.hasLineColor
+    );
   }
 }
-

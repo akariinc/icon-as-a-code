@@ -7,8 +7,12 @@ export class TailLines extends ShapeBase {
   }
 
   // eslint-disable-next-line prettier/prettier
-  public draw(outer: number, inner: number, rgbStart: string, rgbEnd: string): void {
-
+  public draw(
+    outer: number,
+    inner: number,
+    rgbStart: string,
+    rgbEnd: string
+  ): void {
     console.log(rgbStart, rgbEnd);
 
     removeChildren(this.element);

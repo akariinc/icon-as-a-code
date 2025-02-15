@@ -7,5 +7,4 @@ window.onload = (): void => {
   new Controller();
 };
 
-
 export { AkariLogo };

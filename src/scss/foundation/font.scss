@@ -1,4 +1,3 @@
-
 //**********************************************************
 // フォント設定
 //**********************************************************
@@ -9,46 +8,46 @@
 @use "sass:math";
 
 @mixin rem($size) {
-	font-size:math.div($size, 16) * 1rem;
-	// font-size:($size / 16) + rem;
+  font-size: math.div($size, 16) * 1rem;
+  // font-size:($size / 16) + rem;
 }
 
 //*******************************************
 // フォントサイズ
 //*******************************************
 @mixin fontsize-10 {
-	@include rem(10);
+  @include rem(10);
 }
 @mixin fontsize-12 {
-	@include rem(12);
+  @include rem(12);
 }
 @mixin fontsize-13 {
-	@include rem(13);
+  @include rem(13);
 }
 @mixin fontsize-14 {
-	@include rem(14);
+  @include rem(14);
 }
 @mixin fontsize-15 {
-	@include rem(15);
+  @include rem(15);
 }
 @mixin fontsize-16 {
-	@include rem(16);
+  @include rem(16);
 }
 @mixin fontsize-18 {
-	@include rem(18);
+  @include rem(18);
 }
 @mixin fontsize-20 {
-	@include rem(20);
+  @include rem(20);
 }
 @mixin fontsize-22 {
-	@include rem(22);
+  @include rem(22);
 }
 @mixin fontsize-24 {
-	@include rem(24);
+  @include rem(24);
 }
 @mixin fontsize-26 {
-	@include rem(26);
+  @include rem(26);
 }
 @mixin fontsize-30 {
-	@include rem(30);
+  @include rem(30);
 }

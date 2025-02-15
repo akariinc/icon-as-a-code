@@ -2,11 +2,7 @@
 
 Akari's logo icon as a code.
 
-
-
 https://github.com/user-attachments/assets/bbb70d35-f356-4654-8572-4867a514f5ee
-
-
 
 This repository include Logo Generator Controls, SVG exporter and Logo class in vanilla javascript.
 
@@ -21,7 +17,6 @@ This is our currnet full logo.
 This is small version of logo mark. Used for icon.
 
 ![akari_logo_a](https://github.com/user-attachments/assets/7f8610fd-bc2b-4483-bf0a-63565eabe272)
-
 
 ## Testing the desgin / Exporting SVG
 
@@ -53,6 +48,7 @@ window.onload = () => {
 ```
 
 Update the attached logo.
+
 ```typescript
 // update properties
 akariLogo.update({

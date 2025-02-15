@@ -1,8 +1,8 @@
-@use '../../foundation/color';
-@use '../../foundation/font';
-@use '../../foundation/reset';
-@use '../../foundation/variables';
-@use '../../foundation/mixin';
+@use "../../foundation/color";
+@use "../../foundation/font";
+@use "../../foundation/reset";
+@use "../../foundation/variables";
+@use "../../foundation/mixin";
 
 .c-slider {
   &__columns {
