@@ -24,5 +24,7 @@ export interface LogoProperty {
   animCurve: string;
   animDuration: number;
 
+  size: number;
+
   [ken: string]: string | number | boolean;
 }

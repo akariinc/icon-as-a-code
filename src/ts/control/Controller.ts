@@ -41,6 +41,8 @@ export class Controller {
 
       animCurve: "linear",
       animDuration: 1,
+
+      size: 140.85,
     };
 
     this.logo = new AkariLogo("paint", this.props);
@@ -116,6 +118,7 @@ export class Controller {
       const picker: ColorPicker = new ColorPicker(pickers[i]);
       picker.onChange = (name: string, value: string) => {
         console.log(name, value);
+        document.getElementsByClassName(`${name}__text`)[0].textContent = value;
         this.props[name] = value;
         this.logo.update(this.props);
       };
@@ -159,14 +162,18 @@ export class Controller {
       document.getElementById("size") as HTMLElement
     );
     size.onChange = (_, value: number) => {
+      this.props.size = value;
       this.logo.el.style.left = `calc(50% - ${Math.round(value / 2)}px)`;
       this.logo.el.style.top = `calc(50% - ${Math.round(value / 2)}px)`;
-      this.logo.size = value;
+      // this.logo.size = value;
+      this.logo.update({ size: value });
     };
+    this.props.size = size.value;
     this.logo.el.classList.add("l-main__svg");
     this.logo.el.style.left = `calc(50% - ${Math.round(size.value / 2)}px)`;
     this.logo.el.style.top = `calc(50% - ${Math.round(size.value / 2)}px)`;
-    this.logo.size = size.value;
+    // this.logo.size = size.value;
+    this.logo.update({ size: size.value });
   }
 
   private changeType(type: string): void {

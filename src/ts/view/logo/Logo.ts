@@ -38,13 +38,13 @@ export class AkariLogo {
   constructor(type: "iris" | "paint", props: Partial<LogoProperty>) {
     this.props = {
       onlyCircle: false,
-      drawProgress: 0,
-      innerRadius: 0,
-      outerRadius: 0,
+      drawProgress: 1,
+      innerRadius: 7.8313809,
+      outerRadius: 13,
       lineThickness: 0.1,
-      division: 1,
+      division: 90,
       mask: false,
-      tailEndDistance: 0,
+      tailEndDistance: 1,
       // TODO: leave it for now
       // lineCap: "rectangular",
 
@@ -52,21 +52,23 @@ export class AkariLogo {
       opacityEnd: 0,
       opacityCurve: "linear",
 
-      rgbStart: "",
-      rgbEnd: "",
+      rgbStart: "#999999",
+      rgbEnd: "#333333",
       rgbCurve: "linear",
 
-      paintDivision: 4,
-      paintOverlap: 0.02,
+      paintDivision: 60,
+      paintOverlap: 0.1,
 
       animCurve: "linear",
       animDuration: 1,
+
+      size: 140,
       ...props,
     };
 
     this.el = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    this.el.setAttribute("width", "100");
-    this.el.setAttribute("height", "100");
+    this.el.setAttribute("width", "140");
+    this.el.setAttribute("height", "140");
     this.el.setAttribute("viewBox", "0 0 26 26");
 
     this._type = type;
@@ -79,12 +81,16 @@ export class AkariLogo {
   }
 
   update(props: Partial<LogoProperty>): void {
+    if (props.size) {
+      this.size = props.size;
+    }
+
     this.props = { ...this.props, ...props } as LogoProperty;
     this.svgLogo.update(this.props);
   }
 
   anim(props: Partial<LogoProperty>, duration: number): void {
-    this.props = { ...this.props, ...props } as LogoProperty;
+    this.update(props);
     this.props.animDuration = duration;
     this.svgLogo.anim(this.props);
   }
