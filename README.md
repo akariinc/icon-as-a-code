@@ -54,12 +54,12 @@ window.onload = () => {
 
 Update the attached logo.
 ```typescript
-  // update properties
-  akariLogo.update({
-    drawProgress: 1,
-    opacityStart: 1,
-    opacityEnd: 1,
-    rgbStart: "#999999",
-    size: 72,
-  });
+// update properties
+akariLogo.update({
+  drawProgress: 1,
+  opacityStart: 1,
+  opacityEnd: 1,
+  rgbStart: "#999999",
+  size: 72,
+});
 ```
