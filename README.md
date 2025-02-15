@@ -23,7 +23,7 @@ This is small version of logo mark. Used for icon.
 ![akari_logo_a](https://github.com/user-attachments/assets/7f8610fd-bc2b-4483-bf0a-63565eabe272)
 
 
-## Short Instruction
+## Testing the desgin / Exporting SVG
 
 After cloning the repository, start using `yarn` under node.js >= 18.
 
@@ -34,4 +34,26 @@ yarn install
 yarn dev
 ```
 
+## Frontend Usage
 
+```typescript
+import { AkariLogo } from "@akariinc/icon-as-a-code";
+
+window.onload = () => {
+  const akariLogo = new AkariLogo("paint", {
+    innerRadius: 7.8313809,
+    outerRadius: 13,
+  });
+
+  const parentElement = document.getElementById("logo-parent");
+  akariLogo.size = 140.85;
+  akariLogo.update({
+    drawProgress: 1,
+    opacityStart: 1,
+    opacityEnd: 1,
+    rgbStart: "#999999",
+  });
+
+  parentElement?.appendChild(akariLogo.el);
+};
+```
