@@ -2,15 +2,27 @@
 
 Akari's logo icon as a code.
 
-# icon-as-a-code
+This repository include Logo Generator Controls, SVG exporter and Logo class in vanilla javascript.
 
-The starter is built on top of Vite 5.x and prepared for writing libraries in TypeScript. It generates a package with support for ESM modules and IIFE.
+With which you can check a logo mark's shape and color variants, export it as SVG, or use the javascript class with animations options on UI.
+
+## The original logo and mark
+
+This is our currnet full logo.
+
+![akari_logo](https://github.com/user-attachments/assets/81983055-e369-4ea1-b8e2-657933d07948)
+
+This is small version of logo mark. Used for icon.
+
+![akari_logo_a](https://github.com/user-attachments/assets/7f8610fd-bc2b-4483-bf0a-63565eabe272)
+
 
 ## Features
 
 - ESM modules
 - IIFE bundle for direct browser support without bundler
 - Typings bundle
+
 - ESLint - scripts linter
 - Stylelint - styles linter
 - Prettier - formatter
