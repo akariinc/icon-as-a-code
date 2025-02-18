@@ -48,8 +48,8 @@ export class AkariLogo {
       // TODO: leave it for now
       // lineCap: "rectangular",
 
-      opacityStart: 0,
-      opacityEnd: 0,
+      opacityStart: 1,
+      opacityEnd: 1,
       opacityCurve: "linear",
 
       rgbStart: "#999999",
