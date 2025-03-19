@@ -38,6 +38,7 @@ export class AkariLogo {
   constructor(type: "iris" | "paint", props: Partial<LogoProperty>) {
     this.props = {
       onlyCircle: false,
+      drawStart: 0,
       drawProgress: 1,
       innerRadius: 7.8313809,
       outerRadius: 13,

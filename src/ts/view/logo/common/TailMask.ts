@@ -60,8 +60,7 @@ export class TailMask extends ShapeBase {
           L${inner},0
           `;
         } else {
-          const halfThickness: number = props.lineThickness * 0.5;
-
+          // １本目のラインを完全に隠すため、ラインのサイズの２倍の高さを隠す
           circleEndEdge = `
           L${r},${-props.lineThickness * 2}
           L${inner},${-props.lineThickness * 2}
