@@ -73,7 +73,7 @@ export class PaintLogo extends LogoBase {
 
     if (this.props.onlyCircle) {
       // サークルのみ
-      start = div * this.props.drawStart;
+      start = Math.round(div * this.props.drawStart);
       progress = div * this.props.drawProgress;
     } else {
       // サークル＋尻尾
