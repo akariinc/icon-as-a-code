@@ -77,6 +77,9 @@ export class IrisLogo extends LogoBase {
 
     const circlePer = aroundDis / allDis;
 
+    const start: number = Math.round(
+      this.props.division * this.props.drawStart
+    );
     const progress: number = this.props.division * this.props.drawProgress;
 
     const lines: IrisLine[] = [];
@@ -86,7 +89,7 @@ export class IrisLogo extends LogoBase {
       (1 - circlePer);
     let realMaskH: number = 0;
 
-    for (let i = 0; i <= progress; i++) {
+    for (let i = start; i <= progress; i++) {
       const per = i / this.props.division; // * (aroundDis / allDis);
       const opacityPer: number = getEasing(this.props.opacityCurve, per);
       const rgbPer: number = getEasing(this.props.rgbCurve, per);

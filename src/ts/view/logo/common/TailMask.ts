@@ -57,14 +57,14 @@ export class TailMask extends ShapeBase {
         // １本目のラインのマスクを正確に隠すための補正
         if (h === 0) {
           circleEndEdge = `
-          L${inner},0 
+          L${inner},0
           `;
         } else {
-          const halfTickness: number = props.lineThickness * 0.5;
+          const halfThickness: number = props.lineThickness * 0.5;
 
           circleEndEdge = `
-          L${r},${-halfTickness}
-          L${inner},${-halfTickness}
+          L${r},${-props.lineThickness * 2}
+          L${inner},${-props.lineThickness * 2}
           L${inner},0
           `;
         }

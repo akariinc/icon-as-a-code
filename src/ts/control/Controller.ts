@@ -18,6 +18,7 @@ export class Controller {
 
     this.props = {
       onlyCircle: false,
+      drawStart: 0,
       drawProgress: 1,
       innerRadius: 10,
       outerRadius: 13,

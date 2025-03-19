@@ -69,6 +69,8 @@ export class PaintLogo extends LogoBase {
 
     let progress = 0;
 
+    const start: number = Math.round(div * this.props.drawStart);
+
     if (this.props.onlyCircle) {
       // サークルのみ
       progress = div * this.props.drawProgress;
@@ -86,7 +88,7 @@ export class PaintLogo extends LogoBase {
     //   progress
     // );
 
-    for (let i = 0; i < progress; i++) {
+    for (let i = start; i < progress; i++) {
       const per: number = (i / div) * circlePer;
       // const opacityPer: number = getEasing(this.props.opacityCurve, per);
       const rgbPer: number = getEasing(this.props.rgbCurve, per);

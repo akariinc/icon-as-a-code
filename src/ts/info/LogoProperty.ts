@@ -1,5 +1,7 @@
 export interface LogoProperty {
   onlyCircle: boolean;
+
+  drawStart: number;
   drawProgress: number;
   innerRadius: number;
   outerRadius: number;
