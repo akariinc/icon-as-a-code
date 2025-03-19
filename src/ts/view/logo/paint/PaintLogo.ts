@@ -69,13 +69,15 @@ export class PaintLogo extends LogoBase {
 
     let progress = 0;
 
-    const start: number = Math.round(div * this.props.drawStart);
+    let start = 0;
 
     if (this.props.onlyCircle) {
       // サークルのみ
+      start = div * this.props.drawStart;
       progress = div * this.props.drawProgress;
     } else {
       // サークル＋尻尾
+      start = Math.min(div, (div * this.props.drawStart) / circlePer);
       progress = Math.min(div, (div * this.props.drawProgress) / circlePer);
     }
 
