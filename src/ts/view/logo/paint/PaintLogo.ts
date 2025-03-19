@@ -128,6 +128,9 @@ export class PaintLogo extends LogoBase {
     if (!this.props.onlyCircle) {
       // 尻尾ありかつ、drawProgressが尻尾までいっているかどうか
       if (this.props.drawProgress > circlePer) {
+        const opacityStart =
+          (this.props.opacityEnd - this.props.opacityStart) * circlePer +
+          this.props.opacityStart;
         this.tail.draw(
           this.props.outerRadius,
           this.props.innerRadius,
@@ -137,9 +140,10 @@ export class PaintLogo extends LogoBase {
             getEasing(this.props.rgbCurve, circlePer)
           ),
           this.props.rgbEnd,
-          (this.props.opacityEnd - this.props.opacityStart) * circlePer +
-            this.props.opacityStart,
+          opacityStart,
           this.props.opacityEnd,
+          (Math.max(circlePer, this.props.drawStart) - circlePer) /
+            (1 - circlePer),
           (this.props.drawProgress - circlePer) / (1 - circlePer),
           tailBaseHeight
         );

@@ -71,6 +71,7 @@ export class TailFill extends ShapeBase {
     rgbEnd: string,
     opacityStart: number,
     opacityEnd: number,
+    start: number,
     progress: number,
     height: number
   ): void {
@@ -83,13 +84,10 @@ export class TailFill extends ShapeBase {
     this.stop1.setAttribute("stop-color", rgbEnd);
     this.stop1.setAttribute("stop-opacity", opacityEnd.toString());
 
-    // const outer: number = props.outerRadius;
-    // const inner: number = props.innerRadius;
-
     this.setAttributes(this.rect, {
       width: outer - inner,
-      height: height * progress,
-      transform: `translate(${inner}, 0)`,
+      height: height * (progress - start),
+      transform: `translate(${inner}, ${height * start})`,
     });
   }
 }
